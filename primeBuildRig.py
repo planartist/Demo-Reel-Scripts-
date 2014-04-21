@@ -1,4 +1,4 @@
-import maya.cmds as mc 
+import maya.cmds as mc
 import sys
 import os
 import json
@@ -2146,23 +2146,21 @@ class BuildSkeletonBind:
         
         mc.select(self.IkSkelRootNode,hi=True,replace = True)#correct way to do rename list iteration 
         self.TransformsList = mc.ls(sl=True,type='transform')
+        self.LenTransformsList = len(self.TransformsList)
         self.TransformsList.reverse()
+        self.IkContainerList.reverse()
         
-        for i in self.TransformsList:
-            mc.rename(i,i + '_IkSkeleton')
+        for i in range(0,self.LenTransformsList,1):
+            mc.rename(self.TransformsList[i],self.IkContainerList[i] + '_IkSkeleton')
         
         
         
         
                     
-        mc.select('jsBuilder:jsBuilder:lt_Bind_Wrst_bone1_FkControlSkeleton_FkController_IkSkeleton')
-        mc.delete()
-        mc.select('jsBuilder:jsBuilder:rt_Bind_Wrst_bone1_FkControlSkeleton_FkCtrlOffset_IkSkeleton')
-        mc.delete()
-        mc.select('jsBuilder:jsBuilder:ct_Bind_Neck_a_bone1_FkControlSkeletonFkCtrlOffset_IkSkeleton')
-        mc.delete()
-        mc.select('jsBuilder:ct_Bind_Neck_a_bone_IkSkeleton')
-        mc.delete()
+        #mc.select('jsBuilder:jsBuilder:lt_Bind_Wrst_bone1_FkControlSkeleton_FkCtrlOffset_IkSkeleton')
+        #mc.delete()
+        #mc.select('jsBuilder:jsBuilder:rt_Bind_Wrst_bone1_FkControlSkeleton_FkCtrlOffset_IkSkeleton')
+        #mc.delete()
         
         
             
