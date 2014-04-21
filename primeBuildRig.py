@@ -1,4 +1,4 @@
-import maya.cmds as mc
+import maya.cmds as mc 
 import sys
 import os
 import json
