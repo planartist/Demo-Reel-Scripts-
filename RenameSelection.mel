@@ -1,0 +1,36 @@
+
+global proc currentSel(string $name)
+{
+string $name;
+string $current[]=`ls -sl`;
+string $path = "z:\\jsMaya\\jsMayascripts";
+string $fname = ($path +  "\\" + $name + ".mel");
+int $fwrite = `fopen $fname "w"`;
+for($each in $current)
+{
+fprint $fwrite ($each + " ");
+}
+fclose $fwrite;
+int $fread = `fopen $fname "r"`;
+string $contents =`fgetline $fread`;
+print ($contents + "\n");
+string $newselect[];
+tokenize $contents " " $newselect;
+for($each in $newselect)
+select -add $each;
+};
+
+
+global proc readSel (string $name)
+{
+string $name;
+string $path = "z:\\jsMaya\\jsMayascripts";
+string $fname = ($path +  "\\" + $name + ".mel");
+int $fread = `fopen $fname "r"`;
+string $contents =`fgetline $fread`;
+print ($contents + "\n");
+string $newselect[];
+tokenize $contents " " $newselect;
+for($each in $newselect)
+select -add $each;
+};
