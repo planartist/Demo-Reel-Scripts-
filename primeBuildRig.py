@@ -145,25 +145,19 @@ class LocatorSetup(object):
                     mc.parent(self.locatorChildListFileRead[i],self.locatorParentListRead[i])
                 mc.select(clear=True)
                 
-                
-            
-
-        #now to setup the parenting order of locators after all information has been setup 
+#now to setup the parenting order of locators after all information has been setup 
         
 #make lists that need to be passed to other classes without re initializing global such as list 
 
 
 OriginalBindJoints = []
 
-class BuildSkeletonBind:
+class BuildSkeletonRig:
     def __init__(self):
         global LocatorList
        
         
         global OriginalBindJoints
-        
-        
-            
         
         OriginalBindJoints = []
         OriginalBindJoints.extend(range(0,203))
@@ -183,9 +177,6 @@ class BuildSkeletonBind:
         for i in range(0,self.RotListLen,1):
             self.NewRotateOrderListCleaner[i] = str(self.NewRotateOrderList[i]).replace('\n','')
         
-        
-             
-            
         mc.namespace(set=':jsBuilder')
         self.currentNameList = open('x:/jsMaya/jsPython/allJointNames.py','r')
         self.readFileList = [i for i in self.currentNameList.readlines()]
@@ -218,11 +209,6 @@ class BuildSkeletonBind:
         for i in range(0,self.influenceLen,1):
             self.LocatorTransformLocations[i] = mc.xform(self.TransformMenu[i],q=True,ws=True,a=True,t=True)
             
-        
-        
-
-    
-    
         for i in range(0,self.influenceLen,1):
             self.latestTransformX[i] = mc.getAttr(self.TransformMenu[i] + '.translateX')
             self.latestTransformY[i] = mc.getAttr(self.TransformMenu[i] + '.translateY')
@@ -231,10 +217,6 @@ class BuildSkeletonBind:
         
         for i in range(0,self.influenceLen,1):
             mc.joint(n=self.readFileList[i],p=(self.LocatorTransformLocations[i]))
-            
-            
-           
-            
             
             OriginalBindJoints[i]= mc.ls(sl=True)
             
@@ -323,11 +305,6 @@ class BuildSkeletonBind:
         
         
         
-        
-        
-        
-        
-        
         mc.select(self.MyJointDictionary['lt_Bind_Femur_bone\n'])
         mc.joint(e=True,oj='xyz',sao='ydown',ch=True)
         mc.select(self.MyJointDictionary['lt_Bind_Calf_bone\n'])
@@ -353,8 +330,6 @@ class BuildSkeletonBind:
         mc.joint(e=True,oj='xyz',sao='ydown',ch=False,roo='yzx')
         
        
-        
-        
         mc.select(self.MyJointDictionary['rt_Bind_Femur_bone\n'])
         mc.joint(e=True,oj='xyz',sao='ydown',ch=True)
         mc.select(self.MyJointDictionary['rt_Bind_Calf_bone\n'])
@@ -491,8 +466,6 @@ class BuildSkeletonBind:
         for i in range(0,self.twistAmnt,1):
             self.CurrentTwistJointName[i] = str(self.TwistJointNameCleaner[i].replace('[','').replace(']','').replace("",'').replace('"',''))
             
-            
-       
         for i in range(0,self.twistAmnt,1):
             self.TwistJointMdivCleaner[i] = json.dumps(self.TwistMdivList[i],skipkeys=True,separators=(',', ': '))
         for i in range(0,self.twistAmnt,1):
@@ -551,7 +524,7 @@ class BuildSkeletonBind:
         
          
         
-        #print self.InfluenceJointDict
+        
        
          
          #self.TwistJointMDivDict = {self.CurrentTwistJointName[i]:self.CurrentTwistJointMdivList[i] for i in range(0,self.twistAmnt)}
@@ -682,12 +655,10 @@ class BuildSkeletonBind:
         
         self.LenOfFkDuped = len(self.FkSkeletonHi)
         
-       
-        
         mc.select(self.CurrentBindJointList[0],hi=True)
         
-        print len(self.CurrentHiarchyBind)
-        print len(self.FkSkeletonHi)
+        
+        
         
         mc.container(n='FkControlSkeletonContainer')
         
@@ -765,42 +736,7 @@ class BuildSkeletonBind:
         self.CreatedCurveArmOffsets = []
         self.CreatedCurveArmOffsets.extend(range(0,self.LenOfleftArmFkCtrls))
         
-        #omitting this for changes    
-        #for i in range(0,self.LenOfleftArmFkCtrls-1,1):
-            #mc.curve(n=self.BonesForLeftArmFkControls[i] + '_Controller',d=3, p = [(-10.4, 3.709121, 1.205166) , (-10.4, 3.155166, 2.292363),  (-10.4, 2.292362, 3.155167 ),#placeholderCurve
-                    #( -10.4, 1.205166 ,3.709121), (-10.4 ,-1.16229e-007 ,3.900001) ,(-10.4 ,-2.292363, 3.155167) , (-10.4 ,-3.155167 ,2.292363) , 
-                    #(-10.4 ,-3.709121, 1.205167 ) , (-10.4 ,-3.900001, 0) , (-10.4 ,-3.709121, -1.205167) , (-10.4, -3.155167 ,-2.292363) , (-10.4 ,-2.292363, -3.155168 ),
-                    #( -10.4 ,-1.205167, -3.709122 ),( -10.4 ,0 ,-3.900002 ), (-10.4 ,1.205167 ,-3.709122 ) ,( -10.4 ,2.292364, -3.155168) ,( -10.4 ,3.155169 ,-2.292364 ), (-10.4 ,3.709123, -1.205167) ,( -10.4 ,3.9 ,0 ),
-                    #(-10.4 ,3.709121, 1.205166 ), (-10.4 ,3.155166 ,2.292363 ), (-10.4, 3.155166, 2.292363) , (-10.4 ,3.155166, 2.292363 ), (10.4 ,3.155166 ,2.292363) ,( 10.4, 3.155166 ,2.292363 ), (10.4 ,3.155166 ,2.292363) ,
-                    #(10.4, 3.155166, 2.292363 ), (10.4 ,3.709121 ,1.205166 ), (10.4, 3.9 ,0 ), (10.4, 3.709123 ,-1.205167 ), (10.4 ,3.155169, -2.292364 ), (10.4 ,2.292364, -3.155168 ), (10.4, 0 ,-3.900002) , (10.4, -1.205167 ,-3.709122) ,
-                    #(10.4, -2.292363, -3.155168 ), (10.4 ,-3.155167, -2.292363 ), (10.4, -3.709121, -1.205167 ), (10.4 ,-3.900001, 0 ), (10.4, -3.709121, 1.205167 ), (10.4 ,-3.155167, 2.292363) ,( 10.4, -2.292363, 3.155167 ),
-                    #(10.4, -1.205167 ,3.709121 ), (10.4, -1.16229e-007, 3.900001) , (10.4, 1.205166, 3.709121 ), (10.4, 2.292362 ,3.155167 ), (10.4, 3.155166 ,2.292363 ),( 10.4, 3.155166 ,2.292363) , (-0.486866, 0 ,-10.246122 )],
-                    #k=[0 , 0 , 0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 , 21 , 22 , 23 , 24 , 25 , 26 , 27 , 28 , 29 , 30 , 31 , 32 , 33 , 34 , 35 , 36 , 37 , 38 , 39 , 40 , 41 , 42 , 43 , 44 , 45 , 45 , 45])
-            #self.CreatedCurveArmControllers[i] = mc.ls(sl=True)
-            #mc.xform(ro=(self.LeftArmFkRotation[i]),t=(self.LeftArmFkLocation[i]),ra=(self.LeftArmFkLocationAxis[i]),roo=(self.LeftArmFkRotationOrder[i]))
-            #mc.group(em=True,n=self.BonesForLeftArmFkControls[i] + 'Controller_Offset')
-            #self.CreatedCurveArmOffsets[i] = mc.ls(sl=True)
-            #mc.xform(ro=(self.LeftArmFkRotation[i]),t=(self.LeftArmFkLocation[i]),ra=(self.LeftArmFkLocationAxis[i]),roo=(self.LeftArmFkRotationOrder[i]))
-            #mc.parent(self.CreatedCurveArmControllers[i],self.CreatedCurveArmOffsets[i])
-            
-            
-        #for i in range(0,self.LenOfleftArmFkCtrls,1):
-            #mc.move(self.CreatedCurveArmControllers[i],r=True,x=(self.HalfMoveAmnt[i]))
-            
-        #for i in range(0,self.LenOfleftArmFkCtrls,1):
-            #if i == 26:
-                #break#use this if you expect an error and want to pass do the condition bfore the error
-            #mc.parent(self.CreatedCurveArmOffsets[i+1],self.CreatedCurveArmControllers[i])
-            #mc.orientConstraint(self.CreatedCurveArmControllers[i],self.BonesForLeftArmFkControls[i],n=self.BonesForLeftArmFkControls[i]+'ControlConstraint')
-        #mc.select('jsBuilder:jsBuilder:lt_Bind_Wrst_bone1_FkControlSkeletonController_Offset')
-        #mc.delete()
-        
-       
-            
-           
-            #oldparenting#mc.parent('jsBuilder:'+self.BonesForLeftArmFkControls[i]+ '_Controller','jsBuilder:'+self.BonesForLeftArmFkControls[i]+'Controller_Offset')
-            #oldparenting#mc.orientConstraint('jsBuilder:'+self.BonesForLeftArmFkControls[i]+ '_Controller',self.BonesForLeftArmFkControls[i],n=self.BonesForLeftArmFkControls[i]+'Constraint')
-        #cutting off at this point for a temporary test remember cut at this point 
+
          
         mc.select('jsBuilder:ct_Bind_spinebase_bone1_FkControlSkeleton',hi=True)#this process can be repeated for each major chunk just change the break amount accordingly
         self.CurrentSelFkBones = []
@@ -1209,7 +1145,7 @@ class BuildSkeletonBind:
             
         for i in range(0,self.CurrentCountForFk,1):
             self.HalfMoveAmnt[i] = self.MoveControls[i+1] / 2
-            print i
+            
             if i == 3:
                 break
             
@@ -1240,7 +1176,7 @@ class BuildSkeletonBind:
                break
             mc.parent(self.CurrentOffsetForFkControllers[i+1],self.CurrentFkControllers[i])
             mc.orientConstraint(self.CurrentFkControllers[i],self.CurrentFkBonesOnly[i],n=self.CurrentFkBonesOnly[i] + '_FkConstraint')
-            print i
+            
             
         mc.select('jsBuilder:lt_Bind_Rfinger_base_bone1_FkControlSkeleton',hi=True)
         self.CurrentSelFkBones = []
@@ -1272,7 +1208,7 @@ class BuildSkeletonBind:
             
         for i in range(0,self.CurrentCountForFk,1):
             self.HalfMoveAmnt[i] = self.MoveControls[i+1] / 2
-            print i
+            
             if i == 3:
                 break
             
@@ -1334,7 +1270,7 @@ class BuildSkeletonBind:
             
         for i in range(0,self.CurrentCountForFk,1):
             self.HalfMoveAmnt[i] = self.MoveControls[i+1] / 2
-            print i
+            
             if i == 3:
                 break
             
@@ -1396,7 +1332,7 @@ class BuildSkeletonBind:
             
         for i in range(0,self.CurrentCountForFk,1):
             self.HalfMoveAmnt[i] = self.MoveControls[i+1] / 2
-            print i
+            
             if i == 3:
                 break
             
@@ -1458,7 +1394,7 @@ class BuildSkeletonBind:
             
         for i in range(0,self.CurrentCountForFk,1):
             self.HalfMoveAmnt[i] = self.MoveControls[i+1] / 2
-            print i
+            
             if i == 3:
                 break
             
@@ -1521,7 +1457,7 @@ class BuildSkeletonBind:
             
         for i in range(0,self.CurrentCountForFk,1):
             self.HalfMoveAmnt[i] = self.MoveControls[i+1] / 2
-            print i
+            
             if i == 3:
                 break
             
@@ -1584,7 +1520,7 @@ class BuildSkeletonBind:
             
         for i in range(0,self.CurrentCountForFk,1):
             self.HalfMoveAmnt[i] = self.MoveControls[i+1] / 2
-            print i
+            
             if i == 3:
                 break
             
@@ -2157,24 +2093,266 @@ class BuildSkeletonBind:
         
         
                     
-        #mc.select('jsBuilder:jsBuilder:lt_Bind_Wrst_bone1_FkControlSkeleton_FkCtrlOffset_IkSkeleton')
-        #mc.delete()
-        #mc.select('jsBuilder:jsBuilder:rt_Bind_Wrst_bone1_FkControlSkeleton_FkCtrlOffset_IkSkeleton')
-        #mc.delete()
+        mc.select('jsBuilder:jsBuilder:lt_Bind_Wrst_bone1_FkControlSkeleton_FkCtrlOffset_IkSkeleton')
+        mc.delete()
+        mc.select('jsBuilder:jsBuilder:rt_Bind_Wrst_bone1_FkControlSkeleton_FkCtrlOffset_IkSkeleton')
+        mc.delete()
+        
+        mc.select('jsBuilder:jsBuilder:ct_Bind_Neck_a_bone1_FkControlSkeletonFkCtrlOffset_IkSkeleton')
+        mc.delete()
+        
+        mc.select('jsBuilder:ct_Bind_Neck_a_bone_IkSkeleton')
+        mc.delete()
         
         
+        mc.select('jsBuilder:ct_Bind_Neck_a_bone1_FkControlSkeleton_IkSkeleton')
+        mc.delete()
+        mc.select('jsBuilder:rt_Bind_Wrst_bone1_FkControlSkeleton_IkSkeleton')
+        mc.delete()
+        mc.select('jsBuilder:lt_Bind_hand_bone1_FkControlSkeleton_IkSkeleton')
+        mc.delete()
+        mc.select('jsBuilder:lt_Bind_Wrst_bone1_FkControlSkeleton_IkSkeleton')
+        mc.select('jsBuilder:rt_Bind_Wrst_bone_IkSkeleton')
+        self.ltHandtodelete = mc.listRelatives(c=True)
+        mc.select('jsBuilder:lt_Bind_Wrst_bone_IkSkeleton')
+        self.rtHandtodelete = mc.listRelatives(c=True)
+        for i in self.ltHandtodelete:
+            mc.delete(i)
+        for i in self.rtHandtodelete:
+            mc.delete(i)
             
+        mc.select('jsBuilder:ct_Bind_spinebase_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:ct_Bind_spinea_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:ct_Bind_spinec_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:ct_Bind_spined_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:ct_Bind_spinee_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:ct_Bind_spinef_bone_IkSkeleton',add=True)
+        
+        self.IkSpineJoints = mc.ls(sl=True,type='joint')
+        mc.select(clear=True)
+        
+        mc.select('jsBuilder:ct_Bind_spinebase_bone',add=True)
+        mc.select('jsBuilder:ct_Bind_spinea_bone',add=True)
+        mc.select('jsBuilder:ct_Bind_spinec_bone',add=True)
+        mc.select('jsBuilder:ct_Bind_spined_bone',add=True)
+        mc.select('jsBuilder:ct_Bind_spinee_bone',add=True)
+        mc.select('jsBuilder:ct_Bind_spinef_bone',add=True)
+        
+        self.BindSpineJoints = mc.ls(sl=True,type='joint')
+        
+        mc.select('jsBuilder:ct_Bind_spinebase_bone1FkOrientCst')
+        mc.delete()
+        mc.select('jsBuilder:ct_Bind_spinea_bone1FkOrientCst')
+        mc.delete()
+        mc.select('jsBuilder:ct_Bind_spinec_bone1FkOrientCst')
+        mc.delete()
+        mc.select('jsBuilder:ct_Bind_spined_bone1FkOrientCst')
+        mc.delete()
+        mc.select('jsBuilder:ct_Bind_spinee_bone1FkOrientCst')
+        mc.delete()
+        mc.select('jsBuilder:ct_Bind_spinef_bone1FkOrientCst')
+        mc.delete()
+        
+        self.LenofBindSpine = len(self.BindSpineJoints)
+        mc.select(clear=True)
+        #Ik to Bind Spine Constraints
+        mc.orientConstraint('jsBuilder:ct_Bind_spinebase_bone_IkSkeleton', 'jsBuilder:ct_Bind_spinebase_bone',n='jsBuilder:ct_Bind_spinebase_bone' + 'OrientConstraint',mo=False,w=1)
+        mc.orientConstraint('jsBuilder:ct_Bind_spinea_bone_IkSkeleton', 'jsBuilder:ct_Bind_spinea_bone',n='jsBuilder:ct_Bind_spinea_bone'+ 'OrientConstraint',mo=False,w=1)
+        mc.orientConstraint('jsBuilder:ct_Bind_spinec_bone_IkSkeleton', 'jsBuilder:ct_Bind_spinec_bone',n='jsBuilder:ct_Bind_spinec_bone'+ 'OrientConstraint',mo=False,w=1)
+        mc.orientConstraint('jsBuilder:ct_Bind_spined_bone_IkSkeleton', 'jsBuilder:ct_Bind_spined_bone',n='jsBuilder:ct_Bind_spined_bone'+ 'OrientConstraint',mo=False,w=1)
+        mc.orientConstraint('jsBuilder:ct_Bind_spinee_bone_IkSkeleton', 'jsBuilder:ct_Bind_spinee_bone',n='jsBuilder:ct_Bind_spinee_bone'+ 'OrientConstraint',mo=False,w=1)
+        mc.orientConstraint('jsBuilder:ct_Bind_spinef_bone_IkSkeleton', 'jsBuilder:ct_Bind_spinef_bone',n='jsBuilder:ct_Bind_spinef_bone'+ 'OrientConstraint',mo=False,w=1)
+        mc.orientConstraint('jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton', 'jsBuilder:ct_bind_SpineEnd_bone',n='jsBuilder:ct_bind_SpineEnd_bone'+ 'OrientConstraint',mo=False,w=1)
+        mc.orientConstraint('jsBuilder:ct_Bind_Chest_bone_IkSkeleton', 'jsBuilder:ct_Bind_Chest_bone',n='jsBuilder:ct_Bind_Chest_bone'+ 'OrientConstraint',mo=False,w=1)
+        
+        #Fk to Bind Spine Constraints#do this after SpineIkis setup
+        #mc.orientConstraint('jsBuilder:ct_Bind_spinebase_bone1_FkControlSkeleton', 'jsBuilder:ct_Bind_spinebase_bone',n='jsBuilder:ct_Bind_spinebase_bone' + 'OrientConstraint',mo=False,w=1)
+        #mc.orientConstraint('jsBuilder:ct_Bind_spinea_bone1_FkControlSkeleton', 'jsBuilder:ct_Bind_spinea_bone',n='jsBuilder:ct_Bind_spinea_bone'+ 'OrientConstraint',mo=False,w=1)
+        #mc.orientConstraint('jsBuilder:ct_Bind_spinec_bone1_FkControlSkeleton', 'jsBuilder:ct_Bind_spinec_bone',n='jsBuilder:ct_Bind_spinec_bone'+ 'OrientConstraint',mo=False,w=1)
+        #mc.orientConstraint('jsBuilder:ct_Bind_spined_bone1_FkControlSkeleton', 'jsBuilder:ct_Bind_spined_bone',n='jsBuilder:ct_Bind_spined_bone'+ 'OrientConstraint',mo=False,w=1)
+        #mc.orientConstraint('jsBuilder:ct_Bind_spinee_bone1_FkControlSkeleton ','jsBuilder:ct_Bind_spinee_bone',n='jsBuilder:ct_Bind_spinee_bone'+ 'OrientConstraint',mo=False,w=1)
+        #mc.orientConstraint('jsBuilder:ct_Bind_spinef_bone1_FkControlSkeleton', 'jsBuilder:ct_Bind_spinef_bone',n='jsBuilder:ct_Bind_spinef_bone'+ 'OrientConstraint',mo=False,w=1)
         
         
-            
+        
+        mc.ikHandle(sj='jsBuilder:ct_Bind_spinebase_bone_IkSkeleton',ee='jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton',sol='ikSplineSolver',n='IkSpineCurve',roc=True)
+        self.SpineIkSettingsHandle = mc.ls(sl=True)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dTwistControlEnable',1)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dWorldUpAxis',0)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dWorldUpType',2)
+        
+        mc.select('jsBuilder:ct_Bind_spinebase_bone_IkSkeleton')
+        
+        self.Controltarget = mc.ls(sl=True,type='joint')
+        self.TargLoc = mc.xform(self.Controltarget[0],q=True,ws=True,t=True,a=True)
+        self.TargRotOrder = mc.xform(self.Controltarget[0],q=True,roo=True)
+        self.TargRotation = mc.xform(self.Controltarget[0],q=True,ws=True,ro=True)
+        self.TargRotAxis = mc.xform(self.Controltarget[0],q=True,ra=True)
+        mc.select(clear=True)
+        str(self.TargRotOrder)
+        mc.group(em=True,n='BottomLowIkOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.select(clear=True)
+        
+        mc.joint(p=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]),n='BottomLowIk',r=4)
+        mc.select(clear=True)
+        mc.parent('jsBuilder:BottomLowIk','jsBuilder:BottomLowIkOffset')
+        mc.select('jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton')
+        
+        self.Controltarget = mc.ls(sl=True,type='joint')
+        self.TargLoc = mc.xform(self.Controltarget[0],q=True,ws=True,t=True,a=True)
+        self.TargRotOrder = mc.xform(self.Controltarget[0],q=True,roo=True)
+        self.TargRotation = mc.xform(self.Controltarget[0],q=True,ws=True,ro=True)
+        self.TargRotAxis = mc.xform(self.Controltarget[0],q=True,ra=True)
+        
+        mc.select(clear=True)
+        
+        str(self.TargRotOrder)
+        mc.joint(p=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]),n='UpHighIk',r=4)#setup the controllers for the ik spine
+        
+        mc.select(clear=True)
+        
+        mc.group(em=True,n='UpHighIkOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.parent('jsBuilder:UpHighIk','jsBuilder:UpHighIkOffset')
+        
+        for i in self.IkSpineJoints:
+            mc.makeIdentity(i,a=True)
+        
+        mc.select('jsBuilder:curve1')
+        mc.rename('SpineCurveForIk')
+        
+        mc.select(clear=True)
+        mc.select('jsBuilder:lt_Bind_hand_tip1_FkControlSkeleton_IkSkeleton')
+        mc.delete()
+        
+        
+        mc.select(clear=True)
+        
+        mc.connectAttr('jsBuilder:UpHighIk.xformMatrix', 'jsBuilder:IkSpineCurve.dWorldUpMatrix')
+        mc.connectAttr('jsBuilder:BottomLowIk.xformMatrix', 'jsBuilder:IkSpineCurve.dWorldUpMatrixEnd')#setup the up and down vecotr objects for the SpineIk spine
+        mc.skinCluster('jsBuilder:BottomLowIk','jsBuilder:UpHighIk','jsBuilder:SpineCurveForIk',n='SkinforSpineIk',dr=4,tsb=True)
+        
+        #World up type is object start end, object Up is the top object or end
+        #bottom object is the start point
+        #twist controls enabled
+        #starts at spine base ends at spineF
+        #joints smooth bind to curve
+        #make sure it ends at the end effector not the end joint 
+        #have snap enalbed
+        mc.select(clear=True)#mirrror this part for the Right arm IK
+        mc.setAttr('jsBuilder:lt_Bind_Wrst_bone_IkSkeleton.jointOrientX',0)
+        mc.setAttr('jsBuilder:lt_Bind_Wrst_bone_IkSkeleton.jointOrientY',0)
+        mc.setAttr('jsBuilder:lt_Bind_Wrst_bone_IkSkeleton.jointOrientZ',0)
+        
+        mc.ikHandle(sj='jsBuilder:lt_Bind_Humerous_bone_IkSkeleton',ee='jsBuilder:lt_Bind_Wrst_bone_IkSkeleton',n='IkLtArmHandle',sol='ikRPsolver')
+        mc.spaceLocator(p=(0,0,0),n='LtArmPoleVectorCtrl')
+        mc.select('jsBuilder:lt_Bind_Humerous_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:lt_Bind_Wrst_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:LtArmPoleVectorCtrl',add=True)
+        mc.parentConstraint(n='PoleVectorLineup')
+        mc.delete('jsBuilder:PoleVectorLineup')
+        mc.select('jsBuilder:LtArmPoleVectorCtrl')
+        mc.move(0,0,-40,r=True,ls=True,wd=True)
+        self.LtPvectTransLate = mc.xform(q=True,t=True,ws=True,a=True)
+        self.LtPvectRotate = mc.xform(q=True,ro=True,ws=True,a=True)
+        self.LtPvectRotateAxis = mc.xform(q=True,ra=True,ws=True,a=True)
+        mc.group(em=True,n='LtArmPoleVectorCtrlOffset')
+        mc.xform(t=(self.LtPvectTransLate[0],self.LtPvectTransLate[1],self.LtPvectTransLate[1]),ro=(self.LtPvectRotate[0],self.LtPvectRotate[1],self.LtPvectRotate[1]),ra=(self.LtPvectRotateAxis[0],self.LtPvectRotateAxis[1],self.LtPvectRotateAxis[2]))
+        mc.parent('jsBuilder:LtArmPoleVectorCtrl','jsBuilder:LtArmPoleVectorCtrlOffset')
+        
+        
+        mc.select(clear=True)#mirrror this part for the Right arm IK
+        mc.setAttr('jsBuilder:rt_Bind_Wrst_bone_IkSkeleton.jointOrientX',0)
+        mc.setAttr('jsBuilder:rt_Bind_Wrst_bone_IkSkeleton.jointOrientY',0)
+        mc.setAttr('jsBuilder:rt_Bind_Wrst_bone_IkSkeleton.jointOrientZ',0)
+        
+        mc.ikHandle(sj='jsBuilder:rt_Bind_Humerous_bone_IkSkeleton',ee='jsBuilder:rt_Bind_Wrst_bone_IkSkeleton',n='IkRtArmHandle',sol='ikRPsolver')
+        mc.spaceLocator(p=(0,0,0),n='RtArmPoleVectorCtrl')
+        mc.select('jsBuilder:rt_Bind_Humerous_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:rt_Bind_Wrst_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:RtArmPoleVectorCtrl',add=True)
+        mc.parentConstraint(n='PoleVectorLineup')
+        mc.delete('jsBuilder:PoleVectorLineup')
+        mc.select('jsBuilder:RtArmPoleVectorCtrl')
+        mc.move(0,0,-40,r=True,ls=True,wd=True)
+        self.RtPvectTransLate = mc.xform(q=True,t=True,ws=True,a=True)
+        self.RtPvectRotate = mc.xform(q=True,ro=True,ws=True,a=True)
+        self.RtPvectRotateAxis = mc.xform(q=True,ra=True,ws=True,a=True)
+        mc.group(em=True,n='RtArmPoleVectorCtrlOffset')
+        mc.xform(t=(self.RtPvectTransLate[0],self.RtPvectTransLate[1],self.RtPvectTransLate[1]),ro=(self.RtPvectRotate[0],self.RtPvectRotate[1],self.RtPvectRotate[1]),ra=(self.RtPvectRotateAxis[0],self.RtPvectRotateAxis[1],self.RtPvectRotateAxis[2]))
+        mc.parent('jsBuilder:RtArmPoleVectorCtrl','jsBuilder:RtArmPoleVectorCtrlOffset')
+        mc.parent('jsBuilder:LtArmPoleVectorCtrl',w=True)
+        mc.parent('jsBuilder:RtArmPoleVectorCtrl',w=True)
+        
+        mc.parent('jsBuilder:RtArmPoleVectorCtrlOffset','jsBuilder:RtArmPoleVectorCtrl')
+        mc.setAttr('jsBuilder:RtArmPoleVectorCtrlOffset.rotateX',0)
+        mc.setAttr('jsBuilder:RtArmPoleVectorCtrlOffset.rotateY',0)
+        mc.setAttr('jsBuilder:RtArmPoleVectorCtrlOffset.rotateZ',0)
+        mc.setAttr('jsBuilder:RtArmPoleVectorCtrlOffset.translateX',0)
+        mc.setAttr('jsBuilder:RtArmPoleVectorCtrlOffset.translateY',0)
+        mc.setAttr('jsBuilder:RtArmPoleVectorCtrlOffset.translateZ',0)
+        
+        mc.parent('jsBuilder:LtArmPoleVectorCtrlOffset','jsBuilder:LtArmPoleVectorCtrl')
+        mc.setAttr('jsBuilder:LtArmPoleVectorCtrlOffset.rotateX',0)
+        mc.setAttr('jsBuilder:LtArmPoleVectorCtrlOffset.rotateY',0)
+        mc.setAttr('jsBuilder:LtArmPoleVectorCtrlOffset.rotateZ',0)
+        mc.setAttr('jsBuilder:LtArmPoleVectorCtrlOffset.translateX',0)
+        mc.setAttr('jsBuilder:LtArmPoleVectorCtrlOffset.translateY',0)
+        mc.setAttr('jsBuilder:LtArmPoleVectorCtrlOffset.translateZ',0)
         
         
         
+        
+        mc.parent('jsBuilder:LtArmPoleVectorCtrlOffset',w=True)
+        mc.parent('jsBuilder:RtArmPoleVectorCtrlOffset',w=True)
+        
+        mc.parent('jsBuilder:LtArmPoleVectorCtrl','jsBuilder:LtArmPoleVectorCtrlOffset')
+        mc.parent('jsBuilder:RtArmPoleVectorCtrl','jsBuilder:RtArmPoleVectorCtrlOffset')
+        
+        
+        
+        mc.group(em=True,n='RTArmIkOffset')
+        mc.group(em=True,n='LTArmIkOffset')
+        
+        mc.parent('jsBuilder:RTArmIkOffset','jsBuilder:IkRtArmHandle')
+        mc.parent('jsBuilder:LTArmIkOffset','jsBuilder:IkLtArmHandle')
+        
+        mc.setAttr('jsBuilder:LTArmIkOffset.rotateX',0)
+        mc.setAttr('jsBuilder:LTArmIkOffset.rotateY',0)
+        mc.setAttr('jsBuilder:LTArmIkOffset.rotateZ',0)
+        mc.setAttr('jsBuilder:LTArmIkOffset.translateX',0)
+        mc.setAttr('jsBuilder:LTArmIkOffset.translateY',0)
+        mc.setAttr('jsBuilder:LTArmIkOffset.translateZ',0)
+        
+        mc.setAttr('jsBuilder:RTArmIkOffset.rotateX',0)
+        mc.setAttr('jsBuilder:RTArmIkOffset.rotateY',0)
+        mc.setAttr('jsBuilder:RTArmIkOffset.rotateZ',0)
+        mc.setAttr('jsBuilder:RTArmIkOffset.translateX',0)
+        mc.setAttr('jsBuilder:RTArmIkOffset.translateY',0)
+        mc.setAttr('jsBuilder:RTArmIkOffset.translateZ',0)
+        
+        mc.parent('jsBuilder:RTArmIkOffset',w=True)
+        mc.parent('jsBuilder:LTArmIkOffset',w=True)
+        
+        mc.parent('jsBuilder:IkRtArmHandle','jsBuilder:RTArmIkOffset')
+        mc.parent('jsBuilder:IkLtArmHandle','jsBuilder:LTArmIkOffset')
+        
+        
+        
+        
+        mc.select('jsBuilder:LtArmPoleVectorCtrl',add=True)
+        mc.select('jsBuilder:IkLtArmHandle',add=True)
+        mc.PoleVectorConstraint(n='ltArmPoleVectorConstraint')
+        
+        mc.select('jsBuilder:RtArmPoleVectorCtrl',add=True)
+        mc.select('jsBuilder:IkRtArmHandle',add=True)
+        mc.PoleVectorConstraint(n='rtArmPoleVectorConstraint')
 
         
 #myNamespaceObject = NameSpaceCaller()
 myTestObjectA = LocatorSetup()
-myTestObjectB = BuildSkeletonBind()
+myTestObjectB = BuildSkeletonRig()
 
         
         
