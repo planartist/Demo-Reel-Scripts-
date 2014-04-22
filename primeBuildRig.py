@@ -1,3 +1,8 @@
+''' my first fully scriped rig. Set the locators and launch '''
+
+
+
+
 import maya.cmds as mc
 import sys
 import os
