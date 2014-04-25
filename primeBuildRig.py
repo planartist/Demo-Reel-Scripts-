@@ -2400,11 +2400,7 @@ class BuildSkeletonRig:
         mc.PoleVectorConstraint(n='rtArmPoleVectorConstraint')
 
         
-#myNamespaceObject = NameSpaceCaller()
-myTestObjectA = LocatorSetup()
-myTestObjectB = BuildSkeletonRig()
 
-        
         
         
         
