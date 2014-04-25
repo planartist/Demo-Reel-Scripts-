@@ -6,7 +6,7 @@ primeBuildRigRev2  Rig Builder based on Location position
  Also there is no default environment serach within maya, so the file paths in the pyscript need to be
  hardcoded to your locations.There should be no problems dumping the rig into an existing scene, but at this time
  i still need to code so that duplicates of the rigs can be made. If there are other namespaces in the scene 
- the script will set the namespce to the 'jsBuilder:' namespace.
+ the script will set the namespce to the 'jsBuilder:' namespace.Takes a min or two to run.
  
  
  Then Import the script into your scene
