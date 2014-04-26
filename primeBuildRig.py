@@ -1,40 +1,3 @@
-'''Demo-Reel-Scripts-
-==================
-
-primeBuildRigRev2  Rig Builder based on Location position
- Note First put all docs into your python scripts folder based on Your environment variable.
- Also there is no default environment serach within maya, so the file paths in the pyscript need to be
- hardcoded to your locations.There should be no problems dumping the rig into an existing scene, but at this time
- i still need to code so that duplicates of the rigs can be made. If there are other namespaces in the scene 
- the script will set the namespce to the 'jsBuilder:' namespace.Takes a min or two to run.
- 
- 
- Then Import the script into your scene
- 
-  import primeBuildRigRev2
- 
- usage first call to set the namespace make an object call to the first Class 
- 
- 
- setMynamespaceplease = NameSpaceCaller()
- 
- 
- 
- then an object reference call to the Locator setup
- 
- setupMylocators = LocatorSetup()
- 
- 
- Position the locators where you want the joints to be Orientation is setup for a default standup a pose person rig
- 
- when ready launch the builder with another object call to the class
- 
- buildMyrig = BuildSkeletonRig()'''
- 
- 
-
-
-
 import maya.cmds as mc
 import sys
 import os
@@ -2666,6 +2629,99 @@ class BuildSkeletonRig:
         mc.file('c:/FinalDemo/ProxyGeo.ma',i=True)
         
  #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Place Spine Ik down  here<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ 
+ 
+ 
+         #mc.curve(n='IkSpineCurveSkin',d= 3, p=[( 0 ,127.405036 ,0 ),(0 ,131.6976, 2.428914 ),(0, 136.206548, 4.42769) ,( 0 ,140.907356, 5.382386) ,( 0 ,145.703799, 5.326124),(0, 151.641849 ,4.154978),( 0 ,157.414362, 2.335608)],k=[0 , 0 , 0 , 1 , 2 , 3 , 4 , 4 , 4 ]) 
+        #mc.container('jsBuilder:IkSkeletonContainer',e=True,rc=True)
+        mc.ikHandle(sj='jsBuilder:ct_bind_pelvis_bone_IkSkeleton',ee='jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton',sol='ikSplineSolver',scv=True,n='IkSpineCurve',roc=True ,pcv=False,)
+        self.SpineIkSettingsHandle = mc.ls(sl=True)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dTwistControlEnable',1)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dWorldUpAxis',0)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dWorldUpType',2)
+        
+        mc.select('jsBuilder:ct_Bind_spinebase_bone_IkSkeleton')
+        
+        self.Controltarget = mc.ls(sl=True,type='joint')
+        self.TargLoc = mc.xform(self.Controltarget[0],q=True,ws=True,t=True,a=True)
+        self.TargRotOrder = mc.xform(self.Controltarget[0],q=True,roo=True)
+        self.TargRotation = mc.xform(self.Controltarget[0],q=True,ws=True,ro=True,a=True)
+        self.TargRotAxis = mc.xform(self.Controltarget[0],q=True,ra=True)
+        mc.select(clear=True)
+        str(self.TargRotOrder)
+        mc.group(em=True,n='BottomLowIkOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.select(clear=True)
+        
+        mc.joint(p=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]),n='BottomLowIk',rad=4)
+        mc.circle(nr=(0,1,0),r=30,sw=360,fc=True,n='HipsIkControl')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.group(em=True,n='HipsIkCtrlOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.parent('jsBuilder:HipsIkControl','jsBuilder:HipsIkCtrlOffset')
+        mc.select('jsBuilder:HipsIkControl',add=True)
+        mc.select('jsBuilder:BottomLowIk',add=True)
+        mc.parentConstraint(n='HipsIkParentConstraint',mo=True)
+        mc.select(clear=True)
+        mc.parent('jsBuilder:BottomLowIk','jsBuilder:BottomLowIkOffset')
+        mc.select('jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton')
+        
+        self.Controltarget = mc.ls(sl=True,type='joint')
+        self.TargLoc = mc.xform(self.Controltarget[0],q=True,ws=True,t=True,a=True)
+        self.TargRotOrder = mc.xform(self.Controltarget[0],q=True,roo=True)
+        self.TargRotation = mc.xform(self.Controltarget[0],q=True,ws=True,ro=True,a=True)
+        self.TargRotAxis = mc.xform(self.Controltarget[0],q=True,ra=True,a=True)
+        
+        mc.select(clear=True)
+        
+        str(self.TargRotOrder)#chest was setup first
+        mc.joint(p=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]),n='UpHighIk',rad=4,roo=(self.TargRotOrder))#setup the controllers for the ik spine
+        
+        #for i in self.IkSpineJoints:
+            #mc.makeIdentity(i,a=True)
+        
+        mc.group(em=True,n='ChestIkCtrlOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.circle(nr=(0,1,0),r=45,sw=360,fc=True,n='ChestIkCtrl')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.parent('jsBuilder:ChestIkCtrl','jsBuilder:ChestIkCtrlOffset')
+        mc.select('jsBuilder:ChestIkCtrl',add=True)
+        mc.select('jsBuilder:UpHighIk',add=True)
+        mc.parentConstraint(n='chestControlParentConstraintIk',mo=True)
+        mc.select(clear=True)
+        
+        mc.group(em=True,n='UpHighIkOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.parent('jsBuilder:UpHighIk','jsBuilder:UpHighIkOffset')
+        
+        #for i in self.IkSpineJoints:
+            #mc.makeIdentity(i,a=True)
+        
+        mc.select('jsBuilder:curve1')
+        mc.rename('SpineCurveForIk')
+        
+        mc.select(clear=True)
+        mc.select('jsBuilder:lt_Bind_hand_tip1_FkControlSkeleton_IkSkeleton')
+        mc.delete()
+        
+        
+        mc.select(clear=True)
+        
+        mc.connectAttr('jsBuilder:UpHighIk.xformMatrix', 'jsBuilder:IkSpineCurve.dWorldUpMatrix')
+        mc.connectAttr('jsBuilder:BottomLowIk.xformMatrix', 'jsBuilder:IkSpineCurve.dWorldUpMatrixEnd')#setup the up and down vecotr objects for the SpineIk spine
+        mc.skinCluster('jsBuilder:ct_bind_pelvis_bone_IkSkeleton','jsBuilder:UpHighIk','jsBuilder:curve18',n='SkinforSpineIk',dr=4,tsb=True)
+        
+        #mc.select('jsBuilder:BottomLowIk',add=True)
+        #mc.select('jsBuilder:jsBuilder:ct_bind_bodyroot_bone1_IkSkeleton',add=True)
+        #mc.PointConstraint(n='hipsBasePointConsIk')
+        
+        mc.setAttr('jsBuilder:ct_Bind_Chest_bone1_FkControlSkeleton.rotateOrder',2)
+        mc.setAttr('jsBuilder:ct_bind_SpineEnd_bone.rotateOrder',2)
+        mc.setAttr('jsBuilder:ct_Bind_Chest_bone.rotateOrder',2)
+        
+        #constrainng clav fk to Ikfk since both will be controlled the same 
+        mc.orientConstraint('jsBuilder:lt_Bind_Clav_bone1_FkControlSkeleton','jsBuilder:lt_Bind_Clav_bone_IkSkeleton')
+        mc.orientConstraint('jsBuilder:rt_Bind_Clav_bone1_FkControlSkeleton','jsBuilder:rt_Bind_Clav_bone_IkSkeleton')
 
  #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       
         mc.container('jsBuilder:IkSkeletonContainer',e=True,rc=True)
@@ -2728,7 +2784,7 @@ class BuildSkeletonRig:
         mc.parent('jsBuilder:headproxy','jsBuilder:ct_Bind_Head_base_bone')
         
         #new parenting setup here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        mc.parent('jsBuilder:ct_Bind_Chest_bone_IkSkeleton','jsBuilder:ct_bind_SpineEnd_bone')
+        #mc.parent('jsBuilder:ct_Bind_Chest_bone_IkSkeleton','jsBuilder:ct_bind_SpineEnd_bone')
         mc.parent('jsBuilder:ct_Bind_Chest_bone1_FkControlSkeleton','jsBuilder:ct_bind_SpineEnd_bone')
         mc.parent('jsBuilder:jsBuilder:ct_Bind_spinef_bone1_FkControlSkeletonFkCtrlOffset','jsBuilder:ct_Bind_spinee_bone')
         
@@ -2740,7 +2796,7 @@ class BuildSkeletonRig:
         
         mc.select('jsBuilder:lt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
         mc.select('jsBuilder:rt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
-        #building ReverseFoot off existing joints Duplicate this block
+        #building ReverseFoot off existing joints Duplicate this block>>>>LEFTFOOTHERE   VVVV
         mc.select('jsBuilder:lt_Bind_Ankle_bone_IkSkeleton')
         mc.duplicate()
         mc.parent(w=True)
@@ -2786,19 +2842,127 @@ class BuildSkeletonRig:
         mc.select(clear=True)
         mc.select('jsBuilder:lt_FootC',add=True)
         mc.select('jsBuilder:IkLtLegHandle',add=True)
-        mc.PointConstraint(n='IkFootPointControl')
+        mc.PointConstraint(n='LtIkFootPointControl')
         
         mc.parent('jsBuilder:LtIkFootControlOffset','jsBuilder:RootControl')
         
+        mc.delete('jsBuilder:lt_Bind_Foot_tip_bone1FkOrientCst')
+        mc.delete('jsBuilder:LtReverseBallOrientConstr')
+        mc.delete('jsBuilder:ltReverseAnkleRoll')
+        
+        mc.select('jsBuilder:lt_FootA',add=True)
+        mc.select('jsBuilder:lt_Bind_Foot_ball_bone_IkSkeleton',add=True)
+        mc.orientConstraint(n='Lt_OrientConsforRevFoot')
+        mc.select(clear=True)
+        
+        mc.select('jsBuilder:lt_Bind_Ankle_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:lt_Bind_Ankle_bone',add=True)
+        mc.orientConstraint(n='heelOrientConstraintReversefoot')
+        mc.select(clear=True)
+        mc.select('jsBuilder:lt_Bind_Ankle_bone',add=True)
+        mc.select('jsBuilder:lt_Bind_Foot_ball_bone',add=True)
+        mc.orientConstraint(n='Lt_footbballreversefootOrientConstraint')
         #meltopy extremely useful tool from pytmel 
         #chestcrveshapeSnapToPoint; dR_enterForSnap
+        
+        mc.orientConstraint('jsBuilder:ct_Bind_spinef_bone1_FkControlSkeleton','jsBuilder:ct_Bind_spinef_bone_IkSkeleton')
+        
+        #deleting constraints to clean up chest control
+        
+        
+        mc.select('jsBuilder:lt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        mc.select('jsBuilder:rt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        #building ReverseFoot off existing joints Duplicate this block>>>>RIGHTFOOT_HERE   VVVV
+        mc.delete('jsBuilder:rt_Bind_Foot_tip_bone1FkOrientCst')
+        mc.delete('jsBuilder:rt_Bind_Foot_ball_bone1FkOrientCst')
+        mc.delete('jsBuilder:rt_Bind_Ankle_bone1FkOrientCst')
+        mc.select(clear=True)
+        
+        mc.select('jsBuilder:rt_Bind_Ankle_bone_IkSkeleton')
+        mc.duplicate()
+        mc.parent(w=True)
+        
+        mc.select(hi=True)
+        self.RtReverseFootJoints = mc.ls(sl=True,type='joint')
+        
+        
+        self.RtReverseFootJoints.reverse()
+        mc.rename(self.RtReverseFootJoints[0], 'rt_FootA')
+        mc.rename(self.RtReverseFootJoints[1], 'rt_FootB')
+        mc.rename(self.RtReverseFootJoints[2], 'rt_FootC')
+        mc.select(clear=True)
+        mc.select('jsBuilder:rt_FootA')
+        mc.duplicate()
+        mc.rename('rt_ReverseFootHeel')
+        mc.parent(w=True)
+        mc.move(0,0,-30,r=True)
+        
+        mc.rename('rt_ReverseFootHeel')
+        mc.parent('jsBuilder:rt_FootA',w=True)
+        mc.parent('jsBuilder:rt_FootB',w=True)
+        mc.parent('jsBuilder:rt_FootA','jsBuilder:rt_ReverseFootHeel')
+        mc.parent('jsBuilder:rt_FootB','jsBuilder:rt_FootA')
+        mc.parent('jsBuilder:rt_FootC','jsBuilder:rt_FootB')
+        
+        #reroienting the ball
+        
+        
+        mc.select('jsBuilder:rt_ReverseFootHeel')
+        mc.joint(e=True,oj='xyz',sao='zdown',ch=True)
+        
+        self.RtheelLoc = mc.xform(q=True,ws=True,a=True,t=True)
+        mc.group(em=True,n='RtIkFootControlOffset')
+        
        
+        mc.xform(t=(self.RtheelLoc[0],self.RtheelLoc[1],self.RtheelLoc[2]))
         
+        mc.parent('jsBuilder:rt_ReverseFootHeel','jsBuilder:RtIkFootControlOffset')
         
+        mc.orientConstraint('jsBuilder:rt_FootA','jsBuilder:rt_Bind_Foot_ball_bone',n='RtReverseBallOrientConstr',mo=True)
+        mc.orientConstraint('jsBuilder:rt_FootB','jsBuilder:rt_Bind_Ankle_bone',n='rtReverseAnkleRoll',mo=True)
+        mc.select(clear=True)
+        mc.select('jsBuilder:rt_FootC',add=True)
+        mc.select('jsBuilder:IkRtLegHandle',add=True)
+        mc.PointConstraint(n='RtIkFootPointControl')
         
+        mc.parent('jsBuilder:RtIkFootControlOffset','jsBuilder:RootControl')
         
+        #mc.delete('jsBuilder:rt_Bind_Foot_tip_bone1FkOrientCst')
+        mc.delete('jsBuilder:RtReverseBallOrientConstr')
+        mc.delete('jsBuilder:rtReverseAnkleRoll')
         
+        mc.select('jsBuilder:rt_FootA',add=True)
+        mc.select('jsBuilder:rt_Bind_Foot_ball_bone_IkSkeleton',add=True)
+        mc.orientConstraint(n='Rt_OrientConsforRevFoot')
+        mc.select(clear=True)
         
+        mc.select('jsBuilder:rt_Bind_Ankle_bone_IkSkeleton',add=True)
+        mc.select('jsBuilder:rt_Bind_Ankle_bone',add=True)
+        mc.orientConstraint(n='heelOrientConstraintReversefoot')
+        mc.select(clear=True)
+        mc.select('jsBuilder:rt_Bind_Ankle_bone',add=True)
+        mc.select('jsBuilder:rt_Bind_Foot_ball_bone',add=True)
+        mc.orientConstraint(n='Rt_footbballreversefootOrientConstraint')
+        
+        #now setting up constraints to foot from FK feets 
+        mc.select('jsBuilder:lt_Bind_Ankle_bone1_FkControlSkeleton',add=True)
+        mc.select('jsBuilder:lt_Bind_Ankle_bone',add=True)
+        mc.orientConstraint(n='Lt_FkFootOrientConstraintHeel')
+        mc.select(clear=True)
+        mc.select('jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeleton',add=True)
+        mc.select('jsBuilder:lt_Bind_Foot_ball_bone',add=True)
+        mc.orientConstraint(n='Lt_Fk_BallfootOrientConstraint')
+        
+        mc.setAttr("jsBuilder:Lt_OrientConsforRevFoot.offsetX" ,180)
+        mc.setAttr("jsBuilder:Lt_OrientConsforRevFoot.offsetZ", 180)
+        mc.delete('jsBuilder:lt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        mc.delete('jsBuilder:rt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        
+        mc.delete('jsBuilder:rtIkShoulderOffset')
+        mc.delete('jsBuilder:ltIkShoulderOffset')
+        
+        mc.delete('jsBuilder:tongue_geo')
+        ''
 #myNamespaceObject = NameSpaceCaller()
 #myTestObjectA = LocatorSetup()
 #myTestObjectB = BuildSkeletonRig()
