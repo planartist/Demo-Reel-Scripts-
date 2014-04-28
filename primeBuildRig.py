@@ -2871,8 +2871,11 @@ class BuildSkeletonRig:
         mc.setAttr("jsBuilder:RightShoulderControl.overrideEnabled", 1)
         mc.setAttr('jsBuilder:RightShoulderControl.overrideColor',13)
  #>>>>>>>>>>>>>>>>>>>>>>>>now to fix the spine >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ 
  #spinehere>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                #mc.curve(n='IkSpineCurveSkin',d= 3, p=[( 0 ,127.405036 ,0 ),(0 ,131.6976, 2.428914 ),(0, 136.206548, 4.42769) ,( 0 ,140.907356, 5.382386) ,( 0 ,145.703799, 5.326124),(0, 151.641849 ,4.154978),( 0 ,157.414362, 2.335608)],k=[0 , 0 , 0 , 1 , 2 , 3 , 4 , 4 , 4 ]) 
+        #mc.curve(n='IkSpineCurveSkin',d= 3, p=[( 0 ,127.405036 ,0 ),(0 ,131.6976, 2.428914 ),(0, 136.206548, 4.42769) ,( 0 ,140.907356, 5.382386) ,( 0 ,145.703799, 5.326124),(0, 151.641849 ,4.154978),( 0 ,157.414362, 2.335608)],k=[0 , 0 , 0 , 1 , 2 , 3 , 4 , 4 , 4 ]) 
+        mc.select('jsBuilder:ct_Bind_spinebase_bone_IkSkeleton')
+        mc.joint(e=True,oj='xyz',sao='zdown',ch=True)
         #mc.container('jsBuilder:IkSkeletonContainer',e=True,rc=True)
         mc.ikHandle(sj='jsBuilder:ct_Bind_spinebase_bone_IkSkeleton',ee='jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton',sol='ikSplineSolver',scv=True,n='IkSpineCurve',roc=True ,pcv=False,)
         self.SpineIkSettingsHandle = mc.ls(sl=True)
@@ -2952,7 +2955,67 @@ class BuildSkeletonRig:
         mc.skinCluster('jsBuilder:ct_bind_pelvis_bone_IkSkeleton','jsBuilder:UpHighIk','jsBuilder:curve18',n='SkinforSpineIk',dr=4,tsb=True)
         
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>re importing the Geo to parent to skeleton>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mc.parent('jsBuilder:FKIKswitches','jsBuilder:RootControl')
+        mc.parent('jsBuilder:ltlegproxy','jsBuilder:lt_Bind_Femur_bone')
+        mc.parent('jsBuilder:ltthighproxy','jsBuilder:lt_Bind_Femur_bone')
+        mc.parent('jsBuilder:rtlegproxy','jsBuilder:rt_Bind_Femur_bone')
+        mc.parent('jsBuilder:rtthighproxy','jsBuilder:rt_Bind_Femur_bone')
+        mc.parent('jsBuilder:ctwaistproxy','jsBuilder:ct_bind_bodyroot_bone')
         
+       
+        mc.parent('jsBuilder:ctgeoproxyshirttop','jsBuilder:ct_Bind_Chest_bone')
+        
+        mc.parent('jsBuilder:ctgeoproxychest','jsBuilder:ct_Bind_Chest_bone')
+        mc.parent('jsBuilder:spineBaseproxy','jsBuilder:ct_Bind_spinebase_bone')#Done
+        mc.parent('jsBuilder:spineCproxy','jsBuilder:ct_Bind_spinea_bone')#done
+        mc.parent('jsBuilder:spineDproxy','jsBuilder:ct_Bind_spinec_bone')#done
+        mc.parent('jsBuilder:spineBaseChestproxy','jsBuilder:ct_Bind_spinec_bone')#done
+        mc.parent('jsBuilder:spineBChestProxy','jsBuilder:ct_Bind_spined_bone')#done 
+        mc.parent('jsBuilder:spineEproxy','jsBuilder:ct_Bind_spinee_bone')#done
+        mc.parent('jsBuilder:ltgeoproxyshoudler','jsBuilder:lt_Bind_Clav_bone')
+        mc.parent('jsBuilder:ltgeoproxybicep','jsBuilder:lt_Bind_Humerous_bone')
+        mc.parent('jsBuilder:ltgeoproxyforarm','jsBuilder:lt_Bind_Elbow_bone')
+        mc.parent('jsBuilder:ltgeoproxyforarm1','jsBuilder:lt_Bind_Wrst_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltgeoproxythumbbase','jsBuilder:lt_Bind_Thmb_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltgeoproxythumbtip','jsBuilder:lt_Bind_Thmb_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:geoproxyltindexbase','jsBuilder:lt_Bind_Index_a_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:geoproxyindexmid','jsBuilder:lt_Bind_Index_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:geoproxyindextip','jsBuilder:lt_Bind_Index_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltgeoproxymfingerbase','jsBuilder:lt_Bind_Mfinger_a_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltmfingergeoproxymid','jsBuilder:lt_Bind_Mfinger_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltmfingergeoproxytip','jsBuilder:lt_Bind_Mfinger_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltrfingergeoproxybase','jsBuilder:lt_Bind_Rfinger_a_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltrfingergeoproxymid','jsBuilder:lt_Rfinger_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltrfingergeoproxytip','jsBuilder:lt_Bind_Rfinger_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltpinkygeoproxybase','jsBuilder:lt_Pinky_a_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltpinkygeoproxymid','jsBuilder:lt_Pinky_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltpinkygeoproxytip','jsBuilder:lt_Pinky_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:ltcalfproxy','jsBuilder:lt_Bind_Calf_bone')
+        mc.parent('jsBuilder:ltheelproxy','jsBuilder:lt_Bind_Ankle_bone')
+        mc.parent('jsBuilder:ltfoottip','jsBuilder:lt_Bind_Foot_ball_bone')
+        mc.parent('jsBuilder:rtcalfproxy','jsBuilder:rt_Bind_Calf_bone')
+        mc.parent('jsBuilder:rtheelproxy','jsBuilder:rt_Bind_Ankle_bone')
+        mc.parent('jsBuilder:rtfoottipproxy','jsBuilder:rt_Bind_Foot_ball_bone')
+        mc.parent('jsBuilder:rtgeoproxyshoulder','jsBuilder:rt_Bind_Clav_bone')
+        mc.parent('jsBuilder:rtgeoproxybicep','jsBuilder:rt_Bind_Humerous_bone')
+        mc.parent('jsBuilder:rtgeoproxyforarm','jsBuilder:rt_Bind_Elbow_bone')
+        mc.parent('jsBuilder:rtgeoproxyforarm1','jsBuilder:rt_Bind_Wrst_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtgeoproxythumbbase','jsBuilder:rt_Bind_Thmb_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtgeoproxythumbtip','jsBuilder:rt_Bind_Thmb_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtgeoproxyindexbase','jsBuilder:rt_Bind_Index_a_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtgeoproxyindexmid','jsBuilder:rt_Bind_Index_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtgeoproxyindextip','jsBuilder:rt_Bind_Index_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtmfingergeoproxybase','jsBuilder:rt_Bind_Mfinger_a_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtmfingergeoproxymid','jsBuilder:rt_Bind_Mfinger_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtgeoproxymfingertip','jsBuilder:rt_Bind_Mfinger_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtgeoproxyrfingerbase','jsBuilder:rt_Bind_Rfinger_a_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtrfingergeoproxymid','jsBuilder:rt_Rfinger_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtgetproxyrfingertip','jsBuilder:rt_Bind_Rfinger_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtpinkybasefingerproxy','jsBuilder:rt_Pinky_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtpinkmidproxy','jsBuilder:rt_Pinky_b_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:rtpinkytipproxy','jsBuilder:rt_Pinky_c_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:cthairproxy','jsBuilder:ct_Bind_Head_base_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:headproxy','jsBuilder:ct_Bind_Head_base_bone')
         #delete old root constraints
         mc.delete('jsBuilder:RootControlConstraint')
         mc.delete('jsBuilder:jsBuilder:ct_bind_bodyroot_bone1FkOrientCst')
@@ -3028,7 +3091,9 @@ class BuildSkeletonRig:
         mc.setAttr("jsBuilder:RightFootIkControl.overrideEnabled", 1)
         mc.setAttr('jsBuilder:RightFootIkControl.overrideColor',13)
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        
+        mc.delete('jsBuilder:spinceCchestProxy')
+        mc.delete('jsBuilder:tongue_geo')
+        mc.delete('jsBuilder:spineBChestProxy')
         #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Now for the Hand/arm Ik starting with Right Arm>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         mc.select('jsBuilder:RTArmIkOffset')
         self.RightHandLocation = mc.xform(q=True,t=True,ws=True,a=True)
@@ -3088,9 +3153,22 @@ class BuildSkeletonRig:
         mc.setAttr( "jsBuilder:LtArmPoleVectorCtrl.scaleZ", 5)
         
         mc.setAttr( "jsBuilder:RtArmPoleVectorCtrl.scaleX", 5)
-        mc.setAttr( "jsBuilder:RtArmPoleVectorCtrl.scaleY", 5)
+        mc.setAttr("jsBuilder:RtArmPoleVectorCtrl.scaleY", 5)
         mc.setAttr( "jsBuilder:RtArmPoleVectorCtrl.scaleZ", 5)
         
+        
+        mc.parent('jsBuilder:FKIKswitches','jsBuilder:RootControl')
+        mc.parent('jsBuilder:ltlegproxy','jsBuilder:lt_Bind_Femur_bone')
+        mc.parent('jsBuilder:ltthighproxy','jsBuilder:lt_Bind_Femur_bone')
+        mc.parent('jsBuilder:rtlegproxy','jsBuilder:rt_Bind_Femur_bone')
+        mc.parent('jsBuilder:rtthighproxy','jsBuilder:rt_Bind_Femur_bone')
+        mc.parent('jsBuilder:ctwaistproxy','jsBuilder:ct_bind_bodyroot_bone')
+        
+       
+        mc.parent('jsBuilder:ctgeoproxyshirttop','jsBuilder:ct_Bind_Chest_bone')
+        
+        mc.setAttr( "jsBuilder:makeNurbCircle16.radius", 30)
+        mc.setAttr( "jsBuilder:makeNurbCircle15.radius", 30)
         
         
 #myNamespaceObject = NameSpaceCaller()
