@@ -3083,13 +3083,13 @@ class BuildSkeletonRig:
         mc.setAttr("jsBuilder:LtLegPoleVectorCtrl.scaleY", 5)
         mc.setAttr("jsBuilder:LtLegPoleVectorCtrl.scaleZ", 5)
         
-        mc.setAttr(setAttr "jsBuilder:LtArmPoleVectorCtrl.scaleX", 5)
-        mc.setAttr(setAttr "jsBuilder:LtArmPoleVectorCtrl.scaleY", 5)
-        mc.setAttr(setAttr "jsBuilder:LtArmPoleVectorCtrl.scaleZ", 5)
+        mc.setAttr( "jsBuilder:LtArmPoleVectorCtrl.scaleX", 5)
+        mc.setAttr( "jsBuilder:LtArmPoleVectorCtrl.scaleY", 5)
+        mc.setAttr( "jsBuilder:LtArmPoleVectorCtrl.scaleZ", 5)
         
-        mc.setAttr(setAttr "jsBuilder:RtArmPoleVectorCtrl.scaleX", 5)
-        mc.setAttr(setAttr "jsBuilder:RtArmPoleVectorCtrl.scaleY", 5)
-        mc.setAttr(setAttr "jsBuilder:RtArmPoleVectorCtrl.scaleZ", 5)
+        mc.setAttr( "jsBuilder:RtArmPoleVectorCtrl.scaleX", 5)
+        mc.setAttr( "jsBuilder:RtArmPoleVectorCtrl.scaleY", 5)
+        mc.setAttr( "jsBuilder:RtArmPoleVectorCtrl.scaleZ", 5)
         
         
         
