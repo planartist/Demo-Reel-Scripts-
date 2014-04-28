@@ -2040,7 +2040,7 @@ class BuildSkeletonRig:
             mc.orientConstraint(self.CurrentFkControllers[i],self.CurrentSelFkBones[i],mo=False,w=1,n=self.CurrentFkBonesOnly[i] + 'FkOrientConstraint')
             
             
-        mc.orientConstraint('jsBuilder:jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeletonFkController','jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeleton',mo=False,w=1)
+        #mc.orientConstraint('jsBuilder:jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeletonFkController','jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeleton',mo=False,w=1)
         mc.orientConstraint('jsBuilder:jsBuilder:lt_Bind_Rfinger_c_bone1_FkControlSkeleton_FkController','jsBuilder:lt_Bind_Rfinger_c_bone1_FkControlSkeleton',mo=False,w=1)
         mc.orientConstraint('jsBuilder:jsBuilder:lt_Pinky_c_bone1_FkControlSkeleton_FkController','jsBuilder:lt_Pinky_c_bone1_FkControlSkeleton',mo=False,w=1)
         mc.orientConstraint('jsBuilder:jsBuilder:lt_Bind_Mfinger_c_bone1_FkControlSkeleton_FkController','jsBuilder:lt_Bind_Mfinger_c_bone1_FkControlSkeleton',mo=False,w=1)
@@ -2328,7 +2328,7 @@ class BuildSkeletonRig:
         mc.parentConstraint(n='PoleVectorLineup')
         mc.delete('jsBuilder:PoleVectorLineup')
         mc.select('jsBuilder:LtLegPoleVectorCtrl')
-        mc.move(0,0,50,r=True,ls=True,wd=True)
+        mc.move(0,0,75,r=True,ls=True,wd=True)
         self.LtPvectTransLate = mc.xform(q=True,t=True,ws=True,a=True)
         self.LtPvectRotate = mc.xform(q=True,ro=True,ws=True,a=True)
         self.LtPvectRotateAxis = mc.xform(q=True,ra=True,ws=True,a=True)
@@ -2349,7 +2349,7 @@ class BuildSkeletonRig:
         mc.parentConstraint(n='PoleVectorLineup')
         mc.delete('jsBuilder:PoleVectorLineup')
         mc.select('jsBuilder:RtLegPoleVectorCtrl')
-        mc.move(0,0,50,r=True,ls=True,wd=True)
+        mc.move(0,0,75,r=True,ls=True,wd=True)
         self.LtPvectTransLate = mc.xform(q=True,t=True,ws=True,a=True)
         self.LtPvectRotate = mc.xform(q=True,ro=True,ws=True,a=True)
         self.LtPvectRotateAxis = mc.xform(q=True,ra=True,ws=True,a=True)
@@ -2444,14 +2444,14 @@ class BuildSkeletonRig:
         mc.addAttr(longName = 'FKSpineSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
         mc.addAttr(longName = 'FKLeftArmSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
         mc.addAttr(longName = 'FKRightArmSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
-        mc.addAttr(longName = 'IkLeftLegSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
-        mc.addAttr(longName = 'IkRightLegSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
+        mc.addAttr(longName = 'IkLeftLegSwitch',at='double',min=0,max=1,dv=1,k=True,w=True,r=True,s=True)
+        mc.addAttr(longName = 'IkRightLegSwitch',at='double',min=0,max=1,dv=1,k=True,w=True,r=True,s=True)
         mc.addAttr(longName = 'IkLeftArmSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
         mc.addAttr(longName = 'IkRightArmSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
-        mc.addAttr(longName = 'FkRightFootSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
-        mc.addAttr(longName = 'FkLeftFootSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
-        mc.addAttr(longName = 'LeftFootReverseFootSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
-        mc.addAttr(longName = 'RightFootReverseFootSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
+        mc.addAttr(longName = 'FkRightLegSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
+        mc.addAttr(longName = 'FkLeftLegSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
+        #mc.addAttr(longName = 'LeftFootReverseFootSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
+        #mc.addAttr(longName = 'RightFootReverseFootSwitch',at='double',min=0,max=1,dv=0,k=True,w=True,r=True,s=True)
         mc.addAttr(longName = 'AllIkVisibility',at='double',min=0,max=1,dv=1,k=True,w=True,r=True,s=True)
         mc.addAttr(longName = 'AllFKVisibility',at='double',min=0,max=1,dv=1,k=True,w=True,r=True,s=True)
         
@@ -2484,7 +2484,8 @@ class BuildSkeletonRig:
         mc.connectAttr("jsBuilder:FKIKswitches.FKSpineSwitch","jsBuilder:jsBuilder:ct_Bind_Chest_boneIK_OrientConstraint.ct_Bind_Chest_bone1W0")
         mc.connectAttr("jsBuilder:FKIKswitches.AllFKVisibility","jsBuilder:jsBuilder:ct_bind_bodyroot_bone1_FkControlSkeleton.visibility")
         mc.connectAttr("jsBuilder:FKIKswitches.AllIkVisibility","jsBuilder:jsBuilder:ct_bind_bodyroot_bone1_IkSkeleton.visibility")
-        mc.connectAttr("jsBuilder:FKIKswitches.FkLeftFootSwitch","jsBuilder:lt_Bind_Foot_ball_bone1FkOrientCst.lt_Bind_Foot_ball_bone1W0")
+        mc.connectAttr("jsBuilder:FKIKswitches.FkRightLegSwitch","jsBuilder:lt_Bind_Foot_ball_bone1FkOrientCst.lt_Bind_Foot_ball_bone1W0")
+        
         
         #mc.connectAttr(,"jsBuilder:lt_Bind_Humerous_bone1FkOrientCst.lt_Bind_Humerous_bone1W0")
         
@@ -2558,13 +2559,13 @@ class BuildSkeletonRig:
         
         #now for legs Fk switch
         
-        mc.connectAttr("jsBuilder:FKIKswitches.FkLeftFootSwitch","jsBuilder:lt_Bind_Calf_bone1FkOrientCst.lt_Bind_Calf_bone1W0")
-        mc.connectAttr("jsBuilder:FKIKswitches.FkLeftFootSwitch","jsBuilder:lt_Bind_Femur_bone1FkOrientCst.lt_Bind_Femur_bone1W0")
-        mc.connectAttr("jsBuilder:FKIKswitches.FkLeftFootSwitch","jsBuilder:lt_Bind_Ankle_bone1FkOrientCst.lt_Bind_Ankle_bone1W0")
+        mc.connectAttr("jsBuilder:FKIKswitches.FkLeftLegSwitch","jsBuilder:lt_Bind_Calf_bone1FkOrientCst.lt_Bind_Calf_bone1W0")
+        mc.connectAttr("jsBuilder:FKIKswitches.FkLeftLegSwitch","jsBuilder:lt_Bind_Femur_bone1FkOrientCst.lt_Bind_Femur_bone1W0")
+        mc.connectAttr("jsBuilder:FKIKswitches.FkLeftLegSwitch","jsBuilder:lt_Bind_Ankle_bone1FkOrientCst.lt_Bind_Ankle_bone1W0")
         
-        mc.connectAttr("jsBuilder:FKIKswitches.FkRightFootSwitch","jsBuilder:rt_Bind_Femur_bone1FkOrientCst.rt_Bind_Femur_bone1W0")
-        mc.connectAttr("jsBuilder:FKIKswitches.FkRightFootSwitch","jsBuilder:rt_Bind_Calf_bone1FkOrientCst.rt_Bind_Calf_bone1W0")
-        mc.connectAttr("jsBuilder:FKIKswitches.FkRightFootSwitch","jsBuilder:rt_Bind_Ankle_bone1FkOrientCst.rt_Bind_Ankle_bone1W0")
+        mc.connectAttr("jsBuilder:FKIKswitches.FkRightLegSwitch","jsBuilder:rt_Bind_Femur_bone1FkOrientCst.rt_Bind_Femur_bone1W0")
+        mc.connectAttr("jsBuilder:FKIKswitches.FkRightLegSwitch","jsBuilder:rt_Bind_Calf_bone1FkOrientCst.rt_Bind_Calf_bone1W0")
+        mc.connectAttr("jsBuilder:FKIKswitches.FkRightLegSwitch","jsBuilder:rt_Bind_Ankle_bone1FkOrientCst.rt_Bind_Ankle_bone1W0")
         
         #change the colors
         mc.setAttr("jsBuilder:jsBuilder:lt_Bind_Humerous_bone1_FkControlSkeleton_FkController.overrideEnabled", 1)
@@ -2576,10 +2577,10 @@ class BuildSkeletonRig:
         #Arms Ik Switches 
         
         mc.connectAttr("jsBuilder:FKIKswitches.IkLeftArmSwitch","jsBuilder:lt_Bind_Elbow_bone1FkOrientCst.lt_Bind_Elbow_bone_IkSkeletonW1")
-        mc.connectAttr("jsBuilder:FKIKswitches.IkLeftArmSwitch","jsBuilder:lt_Bind_Clav_bone1FkOrientCst.lt_Bind_Clav_bone_IkSkeletonW1")
+        #mc.connectAttr("jsBuilder:FKIKswitches.IkLeftArmSwitch","jsBuilder:lt_Bind_Clav_bone1FkOrientCst.lt_Bind_Clav_bone_IkSkeletonW1")
         mc.connectAttr("jsBuilder:FKIKswitches.IkLeftArmSwitch","jsBuilder:lt_Bind_Humerous_bone1FkOrientCst.lt_Bind_Humerous_bone_IkSkeletonW1")
         
-        mc.connectAttr("jsBuilder:FKIKswitches.IkRightArmSwitch","jsBuilder:rt_Bind_Clav_bone1FkOrientCst.rt_Bind_Clav_bone_IkSkeletonW1")
+        #mc.connectAttr("jsBuilder:FKIKswitches.IkRightArmSwitch","jsBuilder:rt_Bind_Clav_bone1FkOrientCst.rt_Bind_Clav_bone_IkSkeletonW1")
         mc.connectAttr("jsBuilder:FKIKswitches.IkRightArmSwitch","jsBuilder:rt_Bind_Humerous_bone1FkOrientCst.rt_Bind_Humerous_bone_IkSkeletonW1")
         mc.connectAttr("jsBuilder:FKIKswitches.IkRightArmSwitch","jsBuilder:rt_Bind_Elbow_bone1FkOrientCst.rt_Bind_Elbow_bone_IkSkeletonW1")
         
@@ -2595,8 +2596,8 @@ class BuildSkeletonRig:
         mc.setAttr("jsBuilder:FKIKswitches.overrideEnabled",1)
         mc.setAttr("jsBuilder:FKIKswitches.overrideColor",14)
         
-        mc.orientConstraint('jsBuilder:ltIkShoulderCtrl','jsBuilder:lt_Bind_Clav_bone_IkSkeleton',mo=False,w=1)
-        mc.orientConstraint('jsBuilder:rtIkShoulderCtrl','jsBuilder:rt_Bind_Clav_bone_IkSkeleton',mo=False,w=1)
+        #mc.orientConstraint('jsBuilder:ltIkShoulderCtrl','jsBuilder:lt_Bind_Clav_bone_IkSkeleton',mo=False,w=1)
+        #mc.orientConstraint('jsBuilder:rtIkShoulderCtrl','jsBuilder:rt_Bind_Clav_bone_IkSkeleton',mo=False,w=1)
         #mc.setAttr('jsBuilder:HipsIkControl.translateX',0)
         #mc.setAttr('jsBuilder:HipsIkControl.translateY',0)
         #mc.setAttr('jsBuilder:HipsIkControl.translateZ',0)
@@ -2627,176 +2628,29 @@ class BuildSkeletonRig:
         
         
         mc.file('c:/FinalDemo/ProxyGeo.ma',i=True)
-        
+       
  #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Place Spine Ik down  here<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
- 
- 
- 
-         #mc.curve(n='IkSpineCurveSkin',d= 3, p=[( 0 ,127.405036 ,0 ),(0 ,131.6976, 2.428914 ),(0, 136.206548, 4.42769) ,( 0 ,140.907356, 5.382386) ,( 0 ,145.703799, 5.326124),(0, 151.641849 ,4.154978),( 0 ,157.414362, 2.335608)],k=[0 , 0 , 0 , 1 , 2 , 3 , 4 , 4 , 4 ]) 
-        #mc.container('jsBuilder:IkSkeletonContainer',e=True,rc=True)
-        mc.ikHandle(sj='jsBuilder:ct_bind_pelvis_bone_IkSkeleton',ee='jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton',sol='ikSplineSolver',scv=True,n='IkSpineCurve',roc=True ,pcv=False,)
-        self.SpineIkSettingsHandle = mc.ls(sl=True)
-        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dTwistControlEnable',1)
-        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dWorldUpAxis',0)
-        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dWorldUpType',2)
-        
-        mc.select('jsBuilder:ct_Bind_spinebase_bone_IkSkeleton')
-        
-        self.Controltarget = mc.ls(sl=True,type='joint')
-        self.TargLoc = mc.xform(self.Controltarget[0],q=True,ws=True,t=True,a=True)
-        self.TargRotOrder = mc.xform(self.Controltarget[0],q=True,roo=True)
-        self.TargRotation = mc.xform(self.Controltarget[0],q=True,ws=True,ro=True,a=True)
-        self.TargRotAxis = mc.xform(self.Controltarget[0],q=True,ra=True)
-        mc.select(clear=True)
-        str(self.TargRotOrder)
-        mc.group(em=True,n='BottomLowIkOffset')
-        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
-        mc.select(clear=True)
-        
-        mc.joint(p=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]),n='BottomLowIk',rad=4)
-        mc.circle(nr=(0,1,0),r=30,sw=360,fc=True,n='HipsIkControl')
-        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
-        mc.group(em=True,n='HipsIkCtrlOffset')
-        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
-        mc.parent('jsBuilder:HipsIkControl','jsBuilder:HipsIkCtrlOffset')
-        mc.select('jsBuilder:HipsIkControl',add=True)
-        mc.select('jsBuilder:BottomLowIk',add=True)
-        mc.parentConstraint(n='HipsIkParentConstraint',mo=True)
-        mc.select(clear=True)
-        mc.parent('jsBuilder:BottomLowIk','jsBuilder:BottomLowIkOffset')
-        mc.select('jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton')
-        
-        self.Controltarget = mc.ls(sl=True,type='joint')
-        self.TargLoc = mc.xform(self.Controltarget[0],q=True,ws=True,t=True,a=True)
-        self.TargRotOrder = mc.xform(self.Controltarget[0],q=True,roo=True)
-        self.TargRotation = mc.xform(self.Controltarget[0],q=True,ws=True,ro=True,a=True)
-        self.TargRotAxis = mc.xform(self.Controltarget[0],q=True,ra=True,a=True)
-        
-        mc.select(clear=True)
-        
-        str(self.TargRotOrder)#chest was setup first
-        mc.joint(p=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]),n='UpHighIk',rad=4,roo=(self.TargRotOrder))#setup the controllers for the ik spine
-        
-        #for i in self.IkSpineJoints:
-            #mc.makeIdentity(i,a=True)
-        
-        mc.group(em=True,n='ChestIkCtrlOffset')
-        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
-        mc.circle(nr=(0,1,0),r=45,sw=360,fc=True,n='ChestIkCtrl')
-        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
-        mc.parent('jsBuilder:ChestIkCtrl','jsBuilder:ChestIkCtrlOffset')
-        mc.select('jsBuilder:ChestIkCtrl',add=True)
-        mc.select('jsBuilder:UpHighIk',add=True)
-        mc.parentConstraint(n='chestControlParentConstraintIk',mo=True)
-        mc.select(clear=True)
-        
-        mc.group(em=True,n='UpHighIkOffset')
-        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
-        mc.parent('jsBuilder:UpHighIk','jsBuilder:UpHighIkOffset')
-        
-        #for i in self.IkSpineJoints:
-            #mc.makeIdentity(i,a=True)
-        
-        mc.select('jsBuilder:curve1')
-        mc.rename('SpineCurveForIk')
-        
-        mc.select(clear=True)
-        mc.select('jsBuilder:lt_Bind_hand_tip1_FkControlSkeleton_IkSkeleton')
-        mc.delete()
-        
-        
-        mc.select(clear=True)
-        
-        mc.connectAttr('jsBuilder:UpHighIk.xformMatrix', 'jsBuilder:IkSpineCurve.dWorldUpMatrix')
-        mc.connectAttr('jsBuilder:BottomLowIk.xformMatrix', 'jsBuilder:IkSpineCurve.dWorldUpMatrixEnd')#setup the up and down vecotr objects for the SpineIk spine
-        mc.skinCluster('jsBuilder:ct_bind_pelvis_bone_IkSkeleton','jsBuilder:UpHighIk','jsBuilder:curve18',n='SkinforSpineIk',dr=4,tsb=True)
-        
-        #mc.select('jsBuilder:BottomLowIk',add=True)
-        #mc.select('jsBuilder:jsBuilder:ct_bind_bodyroot_bone1_IkSkeleton',add=True)
-        #mc.PointConstraint(n='hipsBasePointConsIk')
-        
-        mc.setAttr('jsBuilder:ct_Bind_Chest_bone1_FkControlSkeleton.rotateOrder',2)
-        mc.setAttr('jsBuilder:ct_bind_SpineEnd_bone.rotateOrder',2)
-        mc.setAttr('jsBuilder:ct_Bind_Chest_bone.rotateOrder',2)
-        
-        #constrainng clav fk to Ikfk since both will be controlled the same 
-        mc.orientConstraint('jsBuilder:lt_Bind_Clav_bone1_FkControlSkeleton','jsBuilder:lt_Bind_Clav_bone_IkSkeleton')
-        mc.orientConstraint('jsBuilder:rt_Bind_Clav_bone1_FkControlSkeleton','jsBuilder:rt_Bind_Clav_bone_IkSkeleton')
 
  #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>       
         mc.container('jsBuilder:IkSkeletonContainer',e=True,rc=True)
         
+        #get rid of geo for github as no way to upload geo on site
         
-        mc.parent('jsBuilder:FKIKswitches','jsBuilder:RootControl')
-        mc.parent('jsBuilder:ltlegproxy','jsBuilder:lt_Bind_Femur_bone')
-        mc.parent('jsBuilder:ltthighproxy','jsBuilder:lt_Bind_Femur_bone')
-        mc.parent('jsBuilder:rtlegproxy','jsBuilder:rt_Bind_Femur_bone')
-        mc.parent('jsBuilder:rtthighproxy','jsBuilder:rt_Bind_Femur_bone')
-        mc.parent('jsBuilder:ctwaistproxy','jsBuilder:ct_bind_bodyroot_bone')
-        mc.parent('jsBuilder:ctgeoproxyshirtbase','jsBuilder:ct_Bind_spinea_bone')
-        mc.parent('jsBuilder:ctgeoproxyshirtmid','jsBuilder:ct_Bind_spinec_bone')
-        mc.parent('jsBuilder:ctgeoproxyshirttop','jsBuilder:ct_Bind_Chest_bone')
-        mc.parent('jsBuilder:ctgeoproxychestbase','jsBuilder:ct_Bind_spinec_bone')
-        mc.parent('jsBuilder:ctgeoproxychest','jsBuilder:ct_Bind_Chest_bone')
-        mc.parent('jsBuilder:ltgeoproxyshoudler','jsBuilder:lt_Bind_Clav_bone')
-        mc.parent('jsBuilder:ltgeoproxybicep','jsBuilder:lt_Bind_Humerous_bone')
-        mc.parent('jsBuilder:ltgeoproxyforarm','jsBuilder:lt_Bind_Elbow_bone')
-        mc.parent('jsBuilder:ltgeoproxyforarm1','jsBuilder:lt_Bind_Wrst_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltgeoproxythumbbase','jsBuilder:lt_Bind_Thmb_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltgeoproxythumbtip','jsBuilder:lt_Bind_Thmb_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:geoproxyltindexbase','jsBuilder:lt_Bind_Index_a_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:geoproxyindexmid','jsBuilder:lt_Bind_Index_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:geoproxyindextip','jsBuilder:lt_Bind_Index_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltgeoproxymfingerbase','jsBuilder:lt_Bind_Mfinger_a_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltmfingergeoproxymid','jsBuilder:lt_Bind_Mfinger_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltmfingergeoproxytip','jsBuilder:lt_Bind_Mfinger_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltrfingergeoproxybase','jsBuilder:lt_Bind_Rfinger_a_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltrfingergeoproxymid','jsBuilder:lt_Rfinger_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltrfingergeoproxytip','jsBuilder:lt_Bind_Rfinger_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltpinkygeoproxybase','jsBuilder:lt_Pinky_a_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltpinkygeoproxymid','jsBuilder:lt_Pinky_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltpinkygeoproxytip','jsBuilder:lt_Pinky_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:ltcalfproxy','jsBuilder:lt_Bind_Calf_bone')
-        mc.parent('jsBuilder:ltheelproxy','jsBuilder:lt_Bind_Ankle_bone')
-        mc.parent('jsBuilder:ltfoottip','jsBuilder:lt_Bind_Foot_ball_bone')
-        mc.parent('jsBuilder:rtcalfproxy','jsBuilder:rt_Bind_Calf_bone')
-        mc.parent('jsBuilder:rtheelproxy','jsBuilder:rt_Bind_Ankle_bone')
-        mc.parent('jsBuilder:rtfoottipproxy','jsBuilder:rt_Bind_Foot_ball_bone')
-        mc.parent('jsBuilder:rtgeoproxyshoulder','jsBuilder:rt_Bind_Clav_bone')
-        mc.parent('jsBuilder:rtgeoproxybicep','jsBuilder:rt_Bind_Humerous_bone')
-        mc.parent('jsBuilder:rtgeoproxyforarm','jsBuilder:rt_Bind_Elbow_bone')
-        mc.parent('jsBuilder:rtgeoproxyforarm1','jsBuilder:rt_Bind_Wrst_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtgeoproxythumbbase','jsBuilder:rt_Bind_Thmb_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtgeoproxythumbtip','jsBuilder:rt_Bind_Thmb_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtgeoproxyindexbase','jsBuilder:rt_Bind_Index_a_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtgeoproxyindexmid','jsBuilder:rt_Bind_Index_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtgeoproxyindextip','jsBuilder:rt_Bind_Index_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtmfingergeoproxybase','jsBuilder:rt_Bind_Mfinger_a_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtmfingergeoproxymid','jsBuilder:rt_Bind_Mfinger_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtgeoproxymfingertip','jsBuilder:rt_Bind_Mfinger_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtgeoproxyrfingerbase','jsBuilder:rt_Bind_Rfinger_a_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtrfingergeoproxymid','jsBuilder:rt_Rfinger_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtgetproxyrfingertip','jsBuilder:rt_Bind_Rfinger_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtpinkybasefingerproxy','jsBuilder:rt_Pinky_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtpinkmidproxy','jsBuilder:rt_Pinky_b_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:rtpinkytipproxy','jsBuilder:rt_Pinky_c_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:cthairproxy','jsBuilder:ct_Bind_Head_base_bone1_FkControlSkeleton')
-        mc.parent('jsBuilder:headproxy','jsBuilder:ct_Bind_Head_base_bone')
         
         #new parenting setup here >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        #mc.parent('jsBuilder:ct_Bind_Chest_bone_IkSkeleton','jsBuilder:ct_bind_SpineEnd_bone')
+        mc.parent('jsBuilder:ct_Bind_Chest_bone_IkSkeleton','jsBuilder:ct_bind_SpineEnd_bone')
         mc.parent('jsBuilder:ct_Bind_Chest_bone1_FkControlSkeleton','jsBuilder:ct_bind_SpineEnd_bone')
         mc.parent('jsBuilder:jsBuilder:ct_Bind_spinef_bone1_FkControlSkeletonFkCtrlOffset','jsBuilder:ct_Bind_spinee_bone')
         
-        mc.orientConstraint('jsBuilder:ct_Bind_spinef_bone1_FkControlSkeleton','jsBuilder:ct_Bind_spinef_bone_IkSkeleton')
+        
         
         #deleting constraints to clean up chest control
         mc.delete('jsBuilder:jsBuilder:ct_Bind_Chest_boneIK_OrientConstraint')
         mc.delete('jsBuilder:jsBuilder:ct_bind_SpineEnd_boneIK_OrientConstraint')
         
-        mc.select('jsBuilder:lt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
-        mc.select('jsBuilder:rt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
-        #building ReverseFoot off existing joints Duplicate this block>>>>LEFTFOOTHERE   VVVV
+        #mc.delete('jsBuilder:lt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        #mc.delete('jsBuilder:rt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        #building ReverseFoot off existing joints Duplicate this block>>>>LEFTFOOTHERE   VVVVBuidls teh Left FOOT REVERSE FOOT 
         mc.select('jsBuilder:lt_Bind_Ankle_bone_IkSkeleton')
         mc.duplicate()
         mc.parent(w=True)
@@ -2837,42 +2691,25 @@ class BuildSkeletonRig:
         
         mc.parent('jsBuilder:lt_ReverseFootHeel','jsBuilder:LtIkFootControlOffset')
         
-        mc.orientConstraint('jsBuilder:lt_FootA','jsBuilder:lt_Bind_Foot_ball_bone',n='LtReverseBallOrientConstr',mo=True)
-        mc.orientConstraint('jsBuilder:lt_FootB','jsBuilder:lt_Bind_Ankle_bone',n='ltReverseAnkleRoll',mo=True)
+        
         mc.select(clear=True)
         mc.select('jsBuilder:lt_FootC',add=True)
         mc.select('jsBuilder:IkLtLegHandle',add=True)
         mc.PointConstraint(n='LtIkFootPointControl')
         
         mc.parent('jsBuilder:LtIkFootControlOffset','jsBuilder:RootControl')
+        #i>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>#now building the right side reverse foot 
+   
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         
-        mc.delete('jsBuilder:lt_Bind_Foot_tip_bone1FkOrientCst')
-        mc.delete('jsBuilder:LtReverseBallOrientConstr')
-        mc.delete('jsBuilder:ltReverseAnkleRoll')
-        
-        mc.select('jsBuilder:lt_FootA',add=True)
-        mc.select('jsBuilder:lt_Bind_Foot_ball_bone_IkSkeleton',add=True)
-        mc.orientConstraint(n='Lt_OrientConsforRevFoot')
-        mc.select(clear=True)
-        
-        mc.select('jsBuilder:lt_Bind_Ankle_bone_IkSkeleton',add=True)
-        mc.select('jsBuilder:lt_Bind_Ankle_bone',add=True)
-        mc.orientConstraint(n='heelOrientConstraintReversefoot')
-        mc.select(clear=True)
-        mc.select('jsBuilder:lt_Bind_Ankle_bone',add=True)
-        mc.select('jsBuilder:lt_Bind_Foot_ball_bone',add=True)
-        mc.orientConstraint(n='Lt_footbballreversefootOrientConstraint')
-        #meltopy extremely useful tool from pytmel 
-        #chestcrveshapeSnapToPoint; dR_enterForSnap
-        
-        mc.orientConstraint('jsBuilder:ct_Bind_spinef_bone1_FkControlSkeleton','jsBuilder:ct_Bind_spinef_bone_IkSkeleton')
         
         #deleting constraints to clean up chest control
         
-        
-        mc.select('jsBuilder:lt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
-        mc.select('jsBuilder:rt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
-        #building ReverseFoot off existing joints Duplicate this block>>>>RIGHTFOOT_HERE   VVVV
+        mc.delete('jsBuilder:rtIkShoulderOffset')
+        mc.delete('jsBuilder:ltIkShoulderOffset')
+        #mc.select('jsBuilder:lt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        #mc.select('jsBuilder:rt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        #building ReverseFoot off existing joints Duplicate this block>>>>RIGHTFOOT_HERE   VVVVTHis WORKS GOOD 
         mc.delete('jsBuilder:rt_Bind_Foot_tip_bone1FkOrientCst')
         mc.delete('jsBuilder:rt_Bind_Foot_ball_bone1FkOrientCst')
         mc.delete('jsBuilder:rt_Bind_Ankle_bone1FkOrientCst')
@@ -2918,51 +2755,344 @@ class BuildSkeletonRig:
         
         mc.parent('jsBuilder:rt_ReverseFootHeel','jsBuilder:RtIkFootControlOffset')
         
-        mc.orientConstraint('jsBuilder:rt_FootA','jsBuilder:rt_Bind_Foot_ball_bone',n='RtReverseBallOrientConstr',mo=True)
-        mc.orientConstraint('jsBuilder:rt_FootB','jsBuilder:rt_Bind_Ankle_bone',n='rtReverseAnkleRoll',mo=True)
+        
+        #mc.orientConstraint('jsBuilder:rt_FootA','jsBuilder:rt_Bind_Foot_ball_bone',n='RtReverseBallOrientConstr',mo=True)
+        #mc.orientConstraint('jsBuilder:rt_FootB','jsBuilder:rt_Bind_Ankle_bone',n='rtReverseAnkleRoll',mo=True)
         mc.select(clear=True)
         mc.select('jsBuilder:rt_FootC',add=True)
         mc.select('jsBuilder:IkRtLegHandle',add=True)
         mc.PointConstraint(n='RtIkFootPointControl')
         
-        mc.parent('jsBuilder:RtIkFootControlOffset','jsBuilder:RootControl')
+        mc.parent('jsBuilder:RtIkFootControlOffset','jsBuilder:RootControl')#copy from here down
         
         #mc.delete('jsBuilder:rt_Bind_Foot_tip_bone1FkOrientCst')
-        mc.delete('jsBuilder:RtReverseBallOrientConstr')
-        mc.delete('jsBuilder:rtReverseAnkleRoll')
+       
         
-        mc.select('jsBuilder:rt_FootA',add=True)
-        mc.select('jsBuilder:rt_Bind_Foot_ball_bone_IkSkeleton',add=True)
-        mc.orientConstraint(n='Rt_OrientConsforRevFoot')
+        mc.delete('jsBuilder:lt_Bind_Foot_ball_bone_IkSkeleton')
+        mc.delete('jsBuilder:rt_Bind_Foot_ball_bone_IkSkeleton')
+        
+        #now to correctly connect the reverse foot Left Side First
+        mc.orientConstraint('jsBuilder:lt_FootA','jsBuilder:lt_Bind_Foot_ball_bone',n='reverseFootFromLtBoneA',mo=True)
+        mc.orientConstraint('jsBuilder:lt_FootB','jsBuilder:lt_Bind_Ankle_bone',n='reverseFootFromLtBoneB',mo=True)
+        #and right side reverse foot 
+        mc.orientConstraint('jsBuilder:rt_FootA','jsBuilder:rt_Bind_Foot_ball_bone',n='reverseFootFromRtBoneA',mo=True)
+        mc.orientConstraint('jsBuilder:rt_FootB','jsBuilder:rt_Bind_Ankle_bone',n='reverseFootFromRtBoneB',mo=True)
+        #delete old
+        
+        mc.delete('jsBuilder:reverseFootFromLtBoneB')
+        
+        mc.delete('jsBuilder:reverseFootFromLtBoneA')
+        #clavicles
+        mc.select(clear=True)
+        mc.orientConstraint('jsBuilder:lt_Bind_Clav_bone1_FkControlSkeleton','jsBuilder:lt_Bind_Clav_bone_IkSkeleton',mo=True)
+        mc.orientConstraint('jsBuilder:rt_Bind_Clav_bone1_FkControlSkeleton','jsBuilder:rt_Bind_Clav_bone_IkSkeleton',mo=True)
+        
+        mc.delete('jsBuilder:lt_Bind_Foot_tip_bone1FkOrientCst')
+        mc.orientConstraint('jsBuilder:lt_FootA','jsBuilder:lt_Bind_Foot_ball_bone',n='reverseFootFromLtBoneA',mo=True)
+        mc.orientConstraint('jsBuilder:lt_FootB','jsBuilder:lt_Bind_Ankle_bone',n='reverseFootFromLtBoneB',mo=True)
+        #now for Fk Foot controls Soon to be sepearted from the FK legs left side first 
+        #mc.orientConstraint('jsBuilder:lt_Bind_Ankle_bone1_FkControlSkeleton','jsBuilder:lt_Bind_Ankle_bone',n='LtFkFootFromFkAnkle',mo=False)
+        #mc.orientConstraint('jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeleton','jsBuilder:lt_Bind_Foot_ball_bone',n='LtFkFootFromBall',mo=False)
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mc.orientConstraint('jsBuilder:jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeletonFkController','jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeleton',mo=False)
+        mc.orientConstraint('jsBuilder:jsBuilder:rt_Bind_Foot_ball_bone1_FkControlSkeletonFkController','jsBuilder:rt_Bind_Foot_ball_bone1_FkControlSkeleton',mo=False)
+        #left foot FK to bind
+        #mc.orientConstraint('jsBuilder:lt_Bind_Ankle_bone1_FkControlSkeleton','jsBuilder:lt_Bind_Ankle_bone',n='RTankleFKConstraint')
+        #mc.orientConstraint('jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeleton','jsBuilder:lt_Bind_Foot_ball_bone',n='RtBallFkConstraint')
+        #make an extra connection for an offsett value #set the default attribute first start with 1 so that the offset is to default for Ik
+        #mc.setAttr('jsBuilder:FKIKswitches.IkLeftLegSwitch', 1)
+        #mc.setDrivenKeyframe('jsBuilder:RTankleFKConstraint.offsetX',cd='jsBuilder:FKIKswitches.IkLeftLegSwitch')
+        #mc.setDrivenKeyframe('jsBuilder:RTankleFKConstraint.offsetY',cd='jsBuilder:FKIKswitches.IkLeftLegSwitch')
+        #mc.setDrivenKeyframe('jsBuilder:RTankleFKConstraint.offsetZ',cd='jsBuilder:FKIKswitches.IkLeftLegSwitch')
+        #mc.setAttr('jsBuilder:FKIKswitches.IkLeftLegSwitch', 0)
+        #mc.setAttr("jsBuilder:RTankleFKConstraint.offsetZ", 0)
+        #mc.setAttr("jsBuilder:RTankleFKConstraint.offsetX", 0)
+        #mc.setAttr("jsBuilder:RTankleFKConstraint.offsetY", 0)
+        #mc.setDrivenKeyframe('jsBuilder:RTankleFKConstraint.offsetX',cd='jsBuilder:FKIKswitches.IkLeftLegSwitch')
+        #mc.setDrivenKeyframe('jsBuilder:RTankleFKConstraint.offsetY',cd='jsBuilder:FKIKswitches.IkLeftLegSwitch')
+        #mc.setDrivenKeyframe('jsBuilder:RTankleFKConstraint.offsetZ',cd='jsBuilder:FKIKswitches.IkLeftLegSwitch')
+       
+        mc.delete('jsBuilder:jsBuilder:rt_Bind_Ankle_bone1_FkControlSkeletonFkCtrlOffset')
+        #delete LeftSide of Fk Foot parent the IkFootcontroller offset under the bind skeleton
+        mc.delete('jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeleton')
+        mc.delete('jsBuilder:rt_Bind_Foot_ball_bone1_FkControlSkeleton')
+        mc.delete('jsBuilder:jsBuilder:lt_Bind_Ankle_bone1_FkControlSkeletonFkCtrlOffset')
+        mc.delete('jsBuilder:jsBuilder:rt_Bind_Femur_bone1_FkControlSkeletonFkCtrlOffset')
+        mc.delete('jsBuilder:jsBuilder:lt_Bind_Femur_bone1_FkControlSkeletonFkCtrlOffset')
+        mc.delete('jsBuilder:rt_Bind_Femur_bone1_FkControlSkeleton')
+        mc.delete('jsBuilder:lt_Bind_Femur_bone1_FkControlSkeleton')
+        mc.parent('jsBuilder:jsBuilder:lt_Bind_Clav_bone1_FkControlSkeletonFkCtrlOffset','jsBuilder:RootControl')
+        mc.parent('jsBuilder:jsBuilder:rt_Bind_Clav_bone1_FkControlSkeletonFkCtrlOffset','jsBuilder:RootControl')
+        mc.delete('jsBuilder:jsBuilder:ct_Bind_spinebase_bone1_FkControlSkeletonFkCtrlOffset')
+        mc.delete('jsBuilder:jsBuilder:ct_Bind_spinef_bone1_FkControlSkeletonFkCtrlOffset')
+    #rebuild new shoulder controls starting with left side 
+    #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ltShoulderReplacment>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>        
+        mc.select('jsBuilder:jsBuilder:lt_Bind_Clav_bone1_FkControlSkeletonFkCtrlOffset')
+        self.NewLtShoulderLocation = mc.xform(q=True,t=True,ws=True,a=True)
+        self.NewLtShoulderRotation = mc.xform(q=True,ro=True,ws=True,a=True)
+        self.NewLtShoulderRotationAxis = mc.xform(q=True,ra=True,ws=True,a=True)
+        self.NewLtShoulderRotationOrder = mc.xform(q=True,roo=True)
+        mc.curve(n='LeftShoulderControl',p=[(0, 1.722746, 7.860943), (0, 3.251807, 7.478254), (0, 6.044356, 5.930515), (0, 7.622267, 3.168138), (0, 8.024061, 1.722746), (0, 8.024061, 1.722746), (0, 12.943818, 1.722746), (0, 12.943818, 1.722746), (0, 12.87327, 4.297724), (0, 12.87327, 4.297724), (0, 17.635217, -0.111485), (0, 17.635217, -0.111485), (0, 12.87327, -4.297724), (0, 12.87327, -4.297724), (0, 12.943818, -1.722746), (0, 12.943818, -1.722746), (0, 8.262479, -1.722746), (0, 8.262479, -1.722746), (0, 8.00495, -3.594757), (0, 6.400466, -6.88404), (0, 3.251807, -8.629149), (0, 1.722746, -9.011838), (0, 1.722746, -9.011838), (0, 1.722746, -12.943818), (0, 1.722746, -12.943818), (0, 4.297724, -12.87327), (0, 4.297724, -12.87327), (0, -0.111485, -17.635217), (0, -0.111485, -17.635217), (0, -4.297724, -12.87327), (0, -4.297724, -12.87327), (0, -1.722746, -12.943818), (0, -1.722746, -12.943818), (0, -1.722746, -9.158285), (0, -1.722746, -9.158285), (0, -3.514276, -8.864257), (0, -6.996539, -7.112641), (0, -8.712533, -3.594757), (0, -8.712533, -3.594757), (0, -8.970063, -1.722746), (0, -8.970063, -1.722746), (0, -12.943818, -1.722746), (0, -12.920302, -2.581072), (0, -12.87327, -4.297724), (0, -12.87327, -4.297724), (0, -17.635217, 0.111485), (0, -17.635217, 0.111485), (0, -12.87327, 4.297724), (0, -12.87327, 4.297724), (0, -12.943818, 1.722746), (0, -12.943818, 1.722746), (0, -8.731644, 1.722746), (0, -8.731644, 1.722746), (0, -6.628292, 6.146979), (0, -3.514276, 7.713361), (0, -3.514276, 7.713361), (0, -1.722746, 8.00739), (0, -1.722746, 8.00739), (0, -1.722746, 12.943818), (0, -1.722746, 12.943818), (0, -4.297724, 12.87327), (0, -4.297724, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217), (0, 4.297724, 12.87327), (0, 4.297724, 12.87327), (0, 1.722746, 12.943818), (0, 1.722746, 12.943818), (0, 1.722746, 9.555234), (1.722746, 0, 7.860943), (1.722746, 0, 7.860943), (6.044356, 0, 5.930515), (6.044356, 0, 5.930515), (8.024061, 0, 1.722746), (8.024061, 0, 1.722746), (12.943818, 0, 1.722746), (12.943818, 0, 1.722746), (12.87327, 0, 4.297724), (12.87327, 0, 4.297724), (17.635217, 0, -0.111485), (17.635217, 0, -0.111485), (12.87327, 0, -4.297724), (12.87327, 0, -4.297724), (12.943818, 0, -1.722746), (12.943818, 0, -1.722746), (8.262479, 0, -1.722746), (8.262479, 0, -1.722746), (8.00495, 0, -3.594757), (6.400466, 0, -6.88404), (3.251807, 0, -8.629149), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -12.943818), (1.722746, 0, -12.943818), (4.297724, 0, -12.87327), (4.297724, 0, -12.87327), (-0.111485, 0, -17.635217), (-0.111485, 0, -17.635217), (-4.297724, 0, -12.87327), (-4.297724, 0, -12.87327), (-1.722746, 0, -12.943818), (-1.722746, 0, -12.943818), (-1.722746, 0, -9.158285), (-1.722746, 0, -9.158285), (-6.996539, 0, -7.112641), (-6.996539, 0, -7.112641), (-8.712533, 0, -3.594757), (-8.970063, 0, -1.722746), (-8.970063, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.87327, 0, -4.297724), (-12.87327, 0, -4.297724), (-17.635217, 0, 0.111485), (-17.635217, 0, 0.111485), (-12.87327, 0, 4.297724), (-12.87327, 0, 4.297724), (-12.943818, 0, 1.722746), (-12.943818, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.32985, 0, 3.168138), (-6.628292, 0, 6.146979), (-3.514276, 0, 7.713361), (-1.722746, 0, 8.00739), (-1.722746, 0, 8.00739), (-1.722746, 0, 12.943818), (-1.722746, 0, 12.943818), (-4.297724, 0, 12.87327), (-4.297724, 0, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217)],k=[0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 130, 130],d=3) 
+        mc.xform(s=(6,6,6))
+        
+        mc.makeIdentity(s=True)
+        mc.xform(t=(self.NewLtShoulderLocation[0],self.NewLtShoulderLocation[1],self.NewLtShoulderLocation[2]),ro=(self.NewLtShoulderRotation[0],self.NewLtShoulderRotation[1],self.NewLtShoulderRotation[2])
+                 ,ra=(self.NewLtShoulderRotationAxis[0],self.NewLtShoulderRotationAxis[1],self.NewLtShoulderRotationAxis[2]),roo=(self.NewLtShoulderRotationOrder))
+        mc.pickWalk(d='down')#moving the shape node to make controller more visible
+        mc.move(10,0,0,os=True,r=True,wd=True)
+        mc.pickWalk(d='up')
+        mc.xform(piv=(self.NewLtShoulderLocation[0],self.NewLtShoulderLocation[1],self.NewLtShoulderLocation[2]),ws=True,a=True)
+        mc.parent('jsBuilder:LeftShoulderControl','jsBuilder:jsBuilder:lt_Bind_Clav_bone1_FkControlSkeletonFkCtrlOffset')
+        mc.parent('jsBuilder:jsBuilder:lt_Bind_Humerous_bone1_FkControlSkeletonFkCtrlOffset','jsBuilder:LeftShoulderControl')
+        mc.delete('jsBuilder:jsBuilder:lt_Bind_Clav_bone1_FkControlSkeleton_FkController')
+        mc.orientConstraint('jsBuilder:LeftShoulderControl','jsBuilder:lt_Bind_Clav_bone1_FkControlSkeleton',mo=False)
+        mc.setAttr("jsBuilder:LeftShoulderControl.overrideEnabled", 1)
+        mc.setAttr('jsBuilder:LeftShoulderControl.overrideColor',14)
+#>>>>>>>>>>>>>>>>>>>>>>now for the right side New Shoulder Control>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mc.select('jsBuilder:jsBuilder:rt_Bind_Clav_bone1_FkControlSkeletonFkCtrlOffset')
+        self.NewRtShoulderLocation = mc.xform(q=True,t=True,ws=True,a=True)
+        self.NewRtShoulderRotation = mc.xform(q=True,ro=True,ws=True,a=True)
+        self.NewRtShoulderRotationAxis = mc.xform(q=True,ra=True,ws=True,a=True)
+        self.NewRtShoulderRotationOrder = mc.xform(q=True,roo=True)
+        mc.curve(n='RightShoulderControl',p=[(0, 1.722746, 7.860943), (0, 3.251807, 7.478254), (0, 6.044356, 5.930515), (0, 7.622267, 3.168138), (0, 8.024061, 1.722746), (0, 8.024061, 1.722746), (0, 12.943818, 1.722746), (0, 12.943818, 1.722746), (0, 12.87327, 4.297724), (0, 12.87327, 4.297724), (0, 17.635217, -0.111485), (0, 17.635217, -0.111485), (0, 12.87327, -4.297724), (0, 12.87327, -4.297724), (0, 12.943818, -1.722746), (0, 12.943818, -1.722746), (0, 8.262479, -1.722746), (0, 8.262479, -1.722746), (0, 8.00495, -3.594757), (0, 6.400466, -6.88404), (0, 3.251807, -8.629149), (0, 1.722746, -9.011838), (0, 1.722746, -9.011838), (0, 1.722746, -12.943818), (0, 1.722746, -12.943818), (0, 4.297724, -12.87327), (0, 4.297724, -12.87327), (0, -0.111485, -17.635217), (0, -0.111485, -17.635217), (0, -4.297724, -12.87327), (0, -4.297724, -12.87327), (0, -1.722746, -12.943818), (0, -1.722746, -12.943818), (0, -1.722746, -9.158285), (0, -1.722746, -9.158285), (0, -3.514276, -8.864257), (0, -6.996539, -7.112641), (0, -8.712533, -3.594757), (0, -8.712533, -3.594757), (0, -8.970063, -1.722746), (0, -8.970063, -1.722746), (0, -12.943818, -1.722746), (0, -12.920302, -2.581072), (0, -12.87327, -4.297724), (0, -12.87327, -4.297724), (0, -17.635217, 0.111485), (0, -17.635217, 0.111485), (0, -12.87327, 4.297724), (0, -12.87327, 4.297724), (0, -12.943818, 1.722746), (0, -12.943818, 1.722746), (0, -8.731644, 1.722746), (0, -8.731644, 1.722746), (0, -6.628292, 6.146979), (0, -3.514276, 7.713361), (0, -3.514276, 7.713361), (0, -1.722746, 8.00739), (0, -1.722746, 8.00739), (0, -1.722746, 12.943818), (0, -1.722746, 12.943818), (0, -4.297724, 12.87327), (0, -4.297724, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217), (0, 4.297724, 12.87327), (0, 4.297724, 12.87327), (0, 1.722746, 12.943818), (0, 1.722746, 12.943818), (0, 1.722746, 9.555234), (1.722746, 0, 7.860943), (1.722746, 0, 7.860943), (6.044356, 0, 5.930515), (6.044356, 0, 5.930515), (8.024061, 0, 1.722746), (8.024061, 0, 1.722746), (12.943818, 0, 1.722746), (12.943818, 0, 1.722746), (12.87327, 0, 4.297724), (12.87327, 0, 4.297724), (17.635217, 0, -0.111485), (17.635217, 0, -0.111485), (12.87327, 0, -4.297724), (12.87327, 0, -4.297724), (12.943818, 0, -1.722746), (12.943818, 0, -1.722746), (8.262479, 0, -1.722746), (8.262479, 0, -1.722746), (8.00495, 0, -3.594757), (6.400466, 0, -6.88404), (3.251807, 0, -8.629149), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -12.943818), (1.722746, 0, -12.943818), (4.297724, 0, -12.87327), (4.297724, 0, -12.87327), (-0.111485, 0, -17.635217), (-0.111485, 0, -17.635217), (-4.297724, 0, -12.87327), (-4.297724, 0, -12.87327), (-1.722746, 0, -12.943818), (-1.722746, 0, -12.943818), (-1.722746, 0, -9.158285), (-1.722746, 0, -9.158285), (-6.996539, 0, -7.112641), (-6.996539, 0, -7.112641), (-8.712533, 0, -3.594757), (-8.970063, 0, -1.722746), (-8.970063, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.87327, 0, -4.297724), (-12.87327, 0, -4.297724), (-17.635217, 0, 0.111485), (-17.635217, 0, 0.111485), (-12.87327, 0, 4.297724), (-12.87327, 0, 4.297724), (-12.943818, 0, 1.722746), (-12.943818, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.32985, 0, 3.168138), (-6.628292, 0, 6.146979), (-3.514276, 0, 7.713361), (-1.722746, 0, 8.00739), (-1.722746, 0, 8.00739), (-1.722746, 0, 12.943818), (-1.722746, 0, 12.943818), (-4.297724, 0, 12.87327), (-4.297724, 0, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217)],k=[0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 130, 130],d=3) 
+        mc.xform(s=(6,6,6))
+        
+        mc.makeIdentity(s=True)
+        mc.xform(t=(self.NewRtShoulderLocation[0],self.NewRtShoulderLocation[1],self.NewRtShoulderLocation[2]),ro=(self.NewRtShoulderRotation[0],self.NewRtShoulderRotation[1],self.NewRtShoulderRotation[2])
+                 ,ra=(self.NewRtShoulderRotationAxis[0],self.NewRtShoulderRotationAxis[1],self.NewRtShoulderRotationAxis[2]),roo=(self.NewRtShoulderRotationOrder))
+        mc.pickWalk(d='down')#moving the shape node to make controller more visible
+        mc.move(10,0,0,os=True,r=True,wd=True)
+        mc.pickWalk(d='up')
+        mc.xform(piv=(self.NewLtShoulderLocation[0],self.NewLtShoulderLocation[1],self.NewLtShoulderLocation[2]),ws=True,a=True)
+        mc.parent('jsBuilder:RightShoulderControl','jsBuilder:jsBuilder:rt_Bind_Clav_bone1_FkControlSkeletonFkCtrlOffset')
+        mc.parent('jsBuilder:jsBuilder:rt_Bind_Humerous_bone1_FkControlSkeletonFkCtrlOffset','jsBuilder:RightShoulderControl')
+        mc.delete('jsBuilder:jsBuilder:rt_Bind_Clav_bone1_FkControlSkeleton_FkController')
+        mc.orientConstraint('jsBuilder:RightShoulderControl','jsBuilder:rt_Bind_Clav_bone1_FkControlSkeleton',mo=False)
+        mc.setAttr("jsBuilder:RightShoulderControl.overrideEnabled", 1)
+        mc.setAttr('jsBuilder:RightShoulderControl.overrideColor',13)
+ #>>>>>>>>>>>>>>>>>>>>>>>>now to fix the spine >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ #spinehere>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                #mc.curve(n='IkSpineCurveSkin',d= 3, p=[( 0 ,127.405036 ,0 ),(0 ,131.6976, 2.428914 ),(0, 136.206548, 4.42769) ,( 0 ,140.907356, 5.382386) ,( 0 ,145.703799, 5.326124),(0, 151.641849 ,4.154978),( 0 ,157.414362, 2.335608)],k=[0 , 0 , 0 , 1 , 2 , 3 , 4 , 4 , 4 ]) 
+        #mc.container('jsBuilder:IkSkeletonContainer',e=True,rc=True)
+        mc.ikHandle(sj='jsBuilder:ct_Bind_spinebase_bone_IkSkeleton',ee='jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton',sol='ikSplineSolver',scv=True,n='IkSpineCurve',roc=True ,pcv=False,)
+        self.SpineIkSettingsHandle = mc.ls(sl=True)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dTwistControlEnable',1)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dWorldUpAxis',0)
+        mc.setAttr(self.SpineIkSettingsHandle[0] + '.dWorldUpType',2)
+        
+        mc.select('jsBuilder:ct_Bind_spinebase_bone_IkSkeleton')
+        
+        self.Controltarget = mc.ls(sl=True,type='joint')
+        self.TargLoc = mc.xform(self.Controltarget[0],q=True,ws=True,t=True,a=True)
+        self.TargRotOrder = mc.xform(self.Controltarget[0],q=True,roo=True)
+        self.TargRotation = mc.xform(self.Controltarget[0],q=True,ws=True,ro=True,a=True)
+        self.TargRotAxis = mc.xform(self.Controltarget[0],q=True,ra=True)
+        mc.select(clear=True)
+        str(self.TargRotOrder)
+        mc.group(em=True,n='BottomLowIkOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
         mc.select(clear=True)
         
-        mc.select('jsBuilder:rt_Bind_Ankle_bone_IkSkeleton',add=True)
-        mc.select('jsBuilder:rt_Bind_Ankle_bone',add=True)
-        mc.orientConstraint(n='heelOrientConstraintReversefoot')
+        mc.joint(p=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]),n='BottomLowIk',rad=4)
+        mc.circle(nr=(0,1,0),r=20,sw=360,fc=True,n='HipsIkControl')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.group(em=True,n='HipsIkCtrlOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.parent('jsBuilder:HipsIkControl','jsBuilder:HipsIkCtrlOffset')
+        mc.select('jsBuilder:HipsIkControl',add=True)
+        mc.select('jsBuilder:BottomLowIk',add=True)
+        mc.parentConstraint(n='HipsIkParentConstraint',mo=True)
         mc.select(clear=True)
-        mc.select('jsBuilder:rt_Bind_Ankle_bone',add=True)
-        mc.select('jsBuilder:rt_Bind_Foot_ball_bone',add=True)
-        mc.orientConstraint(n='Rt_footbballreversefootOrientConstraint')
+        mc.parent('jsBuilder:BottomLowIk','jsBuilder:BottomLowIkOffset')
+        mc.select('jsBuilder:ct_bind_SpineEnd_bone_IkSkeleton')
         
-        #now setting up constraints to foot from FK feets 
-        mc.select('jsBuilder:lt_Bind_Ankle_bone1_FkControlSkeleton',add=True)
-        mc.select('jsBuilder:lt_Bind_Ankle_bone',add=True)
-        mc.orientConstraint(n='Lt_FkFootOrientConstraintHeel')
+        self.Controltarget = mc.ls(sl=True,type='joint')
+        self.TargLoc = mc.xform(self.Controltarget[0],q=True,ws=True,t=True,a=True)
+        self.TargRotOrder = mc.xform(self.Controltarget[0],q=True,roo=True)
+        self.TargRotation = mc.xform(self.Controltarget[0],q=True,ws=True,ro=True,a=True)
+        self.TargRotAxis = mc.xform(self.Controltarget[0],q=True,ra=True,a=True)
+        
         mc.select(clear=True)
-        mc.select('jsBuilder:lt_Bind_Foot_ball_bone1_FkControlSkeleton',add=True)
-        mc.select('jsBuilder:lt_Bind_Foot_ball_bone',add=True)
-        mc.orientConstraint(n='Lt_Fk_BallfootOrientConstraint')
         
-        mc.setAttr("jsBuilder:Lt_OrientConsforRevFoot.offsetX" ,180)
-        mc.setAttr("jsBuilder:Lt_OrientConsforRevFoot.offsetZ", 180)
-        mc.delete('jsBuilder:lt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
-        mc.delete('jsBuilder:rt_Bind_Clav_bone_IkSkeleton_orientConstraint1')
+        str(self.TargRotOrder)#chest was setup first
+        mc.joint(p=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]),n='UpHighIk',rad=4,roo=(self.TargRotOrder))#setup the controllers for the ik spine
         
-        mc.delete('jsBuilder:rtIkShoulderOffset')
-        mc.delete('jsBuilder:ltIkShoulderOffset')
+        #for i in self.IkSpineJoints:
+            #mc.makeIdentity(i,a=True)
         
-        mc.delete('jsBuilder:tongue_geo')
-        ''
+        mc.group(em=True,n='ChestIkCtrlOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.circle(nr=(0,1,0),r=20,sw=360,fc=True,n='ChestIkCtrl')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.parent('jsBuilder:ChestIkCtrl','jsBuilder:ChestIkCtrlOffset')
+        mc.select('jsBuilder:ChestIkCtrl',add=True)
+        mc.select('jsBuilder:UpHighIk',add=True)
+        mc.parentConstraint(n='chestControlParentConstraintIk',mo=True)
+        mc.select(clear=True)
+        
+        mc.group(em=True,n='UpHighIkOffset')
+        mc.xform(t=(self.TargLoc[0],self.TargLoc[1],self.TargLoc[2]))
+        mc.parent('jsBuilder:UpHighIk','jsBuilder:UpHighIkOffset')
+        
+        #for i in self.IkSpineJoints:
+            #mc.makeIdentity(i,a=True)
+        
+        mc.select('jsBuilder:curve1')
+        mc.rename('SpineCurveForIk')
+        
+        mc.select(clear=True)
+        mc.select('jsBuilder:lt_Bind_hand_tip1_FkControlSkeleton_IkSkeleton')
+        mc.delete()
+        
+        
+        mc.select(clear=True)
+        
+        mc.connectAttr('jsBuilder:UpHighIk.xformMatrix', 'jsBuilder:IkSpineCurve.dWorldUpMatrix')
+        mc.connectAttr('jsBuilder:BottomLowIk.xformMatrix', 'jsBuilder:IkSpineCurve.dWorldUpMatrixEnd')#setup the up and down vecotr objects for the SpineIk spine
+        mc.skinCluster('jsBuilder:ct_bind_pelvis_bone_IkSkeleton','jsBuilder:UpHighIk','jsBuilder:curve18',n='SkinforSpineIk',dr=4,tsb=True)
+        
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>re importing the Geo to parent to skeleton>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        
+        #delete old root constraints
+        mc.delete('jsBuilder:RootControlConstraint')
+        mc.delete('jsBuilder:jsBuilder:ct_bind_bodyroot_bone1FkOrientCst')
+        mc.delete('jsBuilder:ct_bind_bodyroot_bone_pointConstraint1')
+        #>>>>>>>>>>>>>>>>>>>>>>>>now to fix the spine >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        #now for final constraints
+        mc.select(clear=True)
+        mc.select('jsBuilder:BottomLowIk',add=True)
+        mc.select('jsBuilder:ct_bind_bodyroot_bone',add=True)
+        mc.PointConstraint(mo=True,n='RootControlToBindHips')
+        mc.select(clear=True)
+        mc.select('jsBuilder:BottomLowIk',add=True)
+        mc.select('jsBuilder:jsBuilder:ct_bind_bodyroot_bone1_IkSkeleton',add=True)
+        mc.PointConstraint(mo=True,n='RootControlToIkHips')
+        mc.select(clear=True)
+        mc.select('jsBuilder:BottomLowIk',add=True)
+        mc.select('jsBuilder:jsBuilder:ct_bind_bodyroot_bone1_FkControlSkeleton',add=True)
+        mc.PointConstraint(mo=True,n='RootTofkHipsCOntrolSkeleton')
+        mc.clear=True
+        mc.orientConstraint('jsBuilder:UpHighIk','jsBuilder:ct_Bind_Chest_bone1_FkControlSkeleton',mo=False,n='ChestFkConstraint')
+        mc.orientConstraint('jsBuilder:UpHighIk','jsBuilder:ct_Bind_Chest_bone_IkSkeleton',mo=False,n='ChestIkConstraint')
+        mc.orientConstraint('jsBuilder:UpHighIk','jsBuilder:ct_Bind_Chest_bone',mo=False,n='ChestBindConstraint')
+        mc.parent('jsBuilder:ChestIkCtrlOffset','jsBuilder:HipsIkControl')
+        mc.parent('jsBuilder:HipsIkCtrlOffset','jsBuilder:RootControl')
+        mc.parent('jsBuilder:jsBuilder:lt_Bind_Clav_bone1_FkControlSkeletonFkCtrlOffset','jsBuilder:ChestIkCtrl')
+        mc.parent('jsBuilder:jsBuilder:rt_Bind_Clav_bone1_FkControlSkeletonFkCtrlOffset','jsBuilder:ChestIkCtrl')
+        
+        #now for the IK FOOT controls #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>LEFT FOOT FIRST>>>>>>>>>>>>>>>>>>>>>
+        mc.select('jsBuilder:LtIkFootControlOffset')
+        self.NewLtFootLocation = mc.xform(q=True,t=True,ws=True,a=True)
+        self.NewLtFootRotation = mc.xform(q=True,ro=True,ws=True,a=True)
+        self.NewLtFootRotationAxis = mc.xform(q=True,ra=True,ws=True,a=True)
+        self.NewLtFootRotationOrder = mc.xform(q=True,roo=True)
+        mc.curve(n='LeftFootIkControl',p=[(0, 1.722746, 7.860943), (0, 3.251807, 7.478254), (0, 6.044356, 5.930515), (0, 7.622267, 3.168138), (0, 8.024061, 1.722746), (0, 8.024061, 1.722746), (0, 12.943818, 1.722746), (0, 12.943818, 1.722746), (0, 12.87327, 4.297724), (0, 12.87327, 4.297724), (0, 17.635217, -0.111485), (0, 17.635217, -0.111485), (0, 12.87327, -4.297724), (0, 12.87327, -4.297724), (0, 12.943818, -1.722746), (0, 12.943818, -1.722746), (0, 8.262479, -1.722746), (0, 8.262479, -1.722746), (0, 8.00495, -3.594757), (0, 6.400466, -6.88404), (0, 3.251807, -8.629149), (0, 1.722746, -9.011838), (0, 1.722746, -9.011838), (0, 1.722746, -12.943818), (0, 1.722746, -12.943818), (0, 4.297724, -12.87327), (0, 4.297724, -12.87327), (0, -0.111485, -17.635217), (0, -0.111485, -17.635217), (0, -4.297724, -12.87327), (0, -4.297724, -12.87327), (0, -1.722746, -12.943818), (0, -1.722746, -12.943818), (0, -1.722746, -9.158285), (0, -1.722746, -9.158285), (0, -3.514276, -8.864257), (0, -6.996539, -7.112641), (0, -8.712533, -3.594757), (0, -8.712533, -3.594757), (0, -8.970063, -1.722746), (0, -8.970063, -1.722746), (0, -12.943818, -1.722746), (0, -12.920302, -2.581072), (0, -12.87327, -4.297724), (0, -12.87327, -4.297724), (0, -17.635217, 0.111485), (0, -17.635217, 0.111485), (0, -12.87327, 4.297724), (0, -12.87327, 4.297724), (0, -12.943818, 1.722746), (0, -12.943818, 1.722746), (0, -8.731644, 1.722746), (0, -8.731644, 1.722746), (0, -6.628292, 6.146979), (0, -3.514276, 7.713361), (0, -3.514276, 7.713361), (0, -1.722746, 8.00739), (0, -1.722746, 8.00739), (0, -1.722746, 12.943818), (0, -1.722746, 12.943818), (0, -4.297724, 12.87327), (0, -4.297724, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217), (0, 4.297724, 12.87327), (0, 4.297724, 12.87327), (0, 1.722746, 12.943818), (0, 1.722746, 12.943818), (0, 1.722746, 9.555234), (1.722746, 0, 7.860943), (1.722746, 0, 7.860943), (6.044356, 0, 5.930515), (6.044356, 0, 5.930515), (8.024061, 0, 1.722746), (8.024061, 0, 1.722746), (12.943818, 0, 1.722746), (12.943818, 0, 1.722746), (12.87327, 0, 4.297724), (12.87327, 0, 4.297724), (17.635217, 0, -0.111485), (17.635217, 0, -0.111485), (12.87327, 0, -4.297724), (12.87327, 0, -4.297724), (12.943818, 0, -1.722746), (12.943818, 0, -1.722746), (8.262479, 0, -1.722746), (8.262479, 0, -1.722746), (8.00495, 0, -3.594757), (6.400466, 0, -6.88404), (3.251807, 0, -8.629149), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -12.943818), (1.722746, 0, -12.943818), (4.297724, 0, -12.87327), (4.297724, 0, -12.87327), (-0.111485, 0, -17.635217), (-0.111485, 0, -17.635217), (-4.297724, 0, -12.87327), (-4.297724, 0, -12.87327), (-1.722746, 0, -12.943818), (-1.722746, 0, -12.943818), (-1.722746, 0, -9.158285), (-1.722746, 0, -9.158285), (-6.996539, 0, -7.112641), (-6.996539, 0, -7.112641), (-8.712533, 0, -3.594757), (-8.970063, 0, -1.722746), (-8.970063, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.87327, 0, -4.297724), (-12.87327, 0, -4.297724), (-17.635217, 0, 0.111485), (-17.635217, 0, 0.111485), (-12.87327, 0, 4.297724), (-12.87327, 0, 4.297724), (-12.943818, 0, 1.722746), (-12.943818, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.32985, 0, 3.168138), (-6.628292, 0, 6.146979), (-3.514276, 0, 7.713361), (-1.722746, 0, 8.00739), (-1.722746, 0, 8.00739), (-1.722746, 0, 12.943818), (-1.722746, 0, 12.943818), (-4.297724, 0, 12.87327), (-4.297724, 0, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217)],k=[0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 130, 130],d=3) 
+        mc.xform(s=(6,6,6))
+        
+        mc.makeIdentity(s=True)
+        mc.xform(t=(self.NewLtFootLocation[0],self.NewLtFootLocation[1],self.NewLtFootLocation[2]),ro=(self.NewLtFootRotation[0],self.NewLtFootRotation[1],self.NewLtFootRotation[2])
+                 ,ra=(self.NewLtFootRotationAxis[0],self.NewLtFootRotationAxis[1],self.NewLtFootRotationAxis[2]),roo=(self.NewLtFootRotationOrder))
+        mc.pickWalk(d='down')#moving the shape node to make controller more visible
+        mc.move(5,0,0,os=True,r=True,wd=True)
+        mc.pickWalk(d='up')
+        mc.xform(piv=(self.NewLtFootLocation[0],self.NewLtFootLocation[1],self.NewLtFootLocation[2]),ws=True,a=True)
+        mc.parent('jsBuilder:LeftFootIkControl','jsBuilder:LtIkFootControlOffset')
+        mc.select('jsBuilder:LeftFootIkControl',add=True)
+        mc.select('jsBuilder:lt_ReverseFootHeel',add=True)
+        mc.parentConstraint(mo=True,n='leftFootIkConstraintcontroller')
+        mc.setAttr("jsBuilder:LeftFootIkControl.overrideEnabled", 1)
+        mc.setAttr('jsBuilder:LeftFootIkControl.overrideColor',14)
+        
+        #Now for the RIghtFOot Ik >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mc.select('jsBuilder:RtIkFootControlOffset')
+        self.NewRtFootLocation = mc.xform(q=True,t=True,ws=True,a=True)
+        self.NewRtFootRotation = mc.xform(q=True,ro=True,ws=True,a=True)
+        self.NewRtFootRotationAxis = mc.xform(q=True,ra=True,ws=True,a=True)
+        self.NewRtFootRotationOrder = mc.xform(q=True,roo=True)
+        mc.curve(n='RightFootIkControl',p=[(0, 1.722746, 7.860943), (0, 3.251807, 7.478254), (0, 6.044356, 5.930515), (0, 7.622267, 3.168138), (0, 8.024061, 1.722746), (0, 8.024061, 1.722746), (0, 12.943818, 1.722746), (0, 12.943818, 1.722746), (0, 12.87327, 4.297724), (0, 12.87327, 4.297724), (0, 17.635217, -0.111485), (0, 17.635217, -0.111485), (0, 12.87327, -4.297724), (0, 12.87327, -4.297724), (0, 12.943818, -1.722746), (0, 12.943818, -1.722746), (0, 8.262479, -1.722746), (0, 8.262479, -1.722746), (0, 8.00495, -3.594757), (0, 6.400466, -6.88404), (0, 3.251807, -8.629149), (0, 1.722746, -9.011838), (0, 1.722746, -9.011838), (0, 1.722746, -12.943818), (0, 1.722746, -12.943818), (0, 4.297724, -12.87327), (0, 4.297724, -12.87327), (0, -0.111485, -17.635217), (0, -0.111485, -17.635217), (0, -4.297724, -12.87327), (0, -4.297724, -12.87327), (0, -1.722746, -12.943818), (0, -1.722746, -12.943818), (0, -1.722746, -9.158285), (0, -1.722746, -9.158285), (0, -3.514276, -8.864257), (0, -6.996539, -7.112641), (0, -8.712533, -3.594757), (0, -8.712533, -3.594757), (0, -8.970063, -1.722746), (0, -8.970063, -1.722746), (0, -12.943818, -1.722746), (0, -12.920302, -2.581072), (0, -12.87327, -4.297724), (0, -12.87327, -4.297724), (0, -17.635217, 0.111485), (0, -17.635217, 0.111485), (0, -12.87327, 4.297724), (0, -12.87327, 4.297724), (0, -12.943818, 1.722746), (0, -12.943818, 1.722746), (0, -8.731644, 1.722746), (0, -8.731644, 1.722746), (0, -6.628292, 6.146979), (0, -3.514276, 7.713361), (0, -3.514276, 7.713361), (0, -1.722746, 8.00739), (0, -1.722746, 8.00739), (0, -1.722746, 12.943818), (0, -1.722746, 12.943818), (0, -4.297724, 12.87327), (0, -4.297724, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217), (0, 4.297724, 12.87327), (0, 4.297724, 12.87327), (0, 1.722746, 12.943818), (0, 1.722746, 12.943818), (0, 1.722746, 9.555234), (1.722746, 0, 7.860943), (1.722746, 0, 7.860943), (6.044356, 0, 5.930515), (6.044356, 0, 5.930515), (8.024061, 0, 1.722746), (8.024061, 0, 1.722746), (12.943818, 0, 1.722746), (12.943818, 0, 1.722746), (12.87327, 0, 4.297724), (12.87327, 0, 4.297724), (17.635217, 0, -0.111485), (17.635217, 0, -0.111485), (12.87327, 0, -4.297724), (12.87327, 0, -4.297724), (12.943818, 0, -1.722746), (12.943818, 0, -1.722746), (8.262479, 0, -1.722746), (8.262479, 0, -1.722746), (8.00495, 0, -3.594757), (6.400466, 0, -6.88404), (3.251807, 0, -8.629149), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -12.943818), (1.722746, 0, -12.943818), (4.297724, 0, -12.87327), (4.297724, 0, -12.87327), (-0.111485, 0, -17.635217), (-0.111485, 0, -17.635217), (-4.297724, 0, -12.87327), (-4.297724, 0, -12.87327), (-1.722746, 0, -12.943818), (-1.722746, 0, -12.943818), (-1.722746, 0, -9.158285), (-1.722746, 0, -9.158285), (-6.996539, 0, -7.112641), (-6.996539, 0, -7.112641), (-8.712533, 0, -3.594757), (-8.970063, 0, -1.722746), (-8.970063, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.87327, 0, -4.297724), (-12.87327, 0, -4.297724), (-17.635217, 0, 0.111485), (-17.635217, 0, 0.111485), (-12.87327, 0, 4.297724), (-12.87327, 0, 4.297724), (-12.943818, 0, 1.722746), (-12.943818, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.32985, 0, 3.168138), (-6.628292, 0, 6.146979), (-3.514276, 0, 7.713361), (-1.722746, 0, 8.00739), (-1.722746, 0, 8.00739), (-1.722746, 0, 12.943818), (-1.722746, 0, 12.943818), (-4.297724, 0, 12.87327), (-4.297724, 0, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217)],k=[0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 130, 130],d=3) 
+        mc.xform(s=(6,6,6))
+        
+        mc.makeIdentity(s=True)
+        mc.xform(t=(self.NewRtFootLocation[0],self.NewRtFootLocation[1],self.NewRtFootLocation[2]),ro=(self.NewRtFootRotation[0],self.NewRtFootRotation[1],self.NewRtFootRotation[2])
+                 ,ra=(self.NewRtFootRotationAxis[0],self.NewRtFootRotationAxis[1],self.NewRtFootRotationAxis[2]),roo=(self.NewRtFootRotationOrder))
+        mc.pickWalk(d='down')#moving the shape node to make controller more visible
+        mc.move(5,0,0,os=True,r=True,wd=True)
+        mc.pickWalk(d='up')
+        mc.xform(piv=(self.NewRtFootLocation[0],self.NewRtFootLocation[1],self.NewRtFootLocation[2]),ws=True,a=True)
+        mc.parent('jsBuilder:RightFootIkControl','jsBuilder:RtIkFootControlOffset')
+        mc.select('jsBuilder:RightFootIkControl',add=True)
+        mc.select('jsBuilder:rt_ReverseFootHeel',add=True)
+        mc.parentConstraint(mo=True,n='leftFootIkConstraintcontroller')
+        mc.setAttr("jsBuilder:RightFootIkControl.overrideEnabled", 1)
+        mc.setAttr('jsBuilder:RightFootIkControl.overrideColor',13)
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        
+        #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Now for the Hand/arm Ik starting with Right Arm>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mc.select('jsBuilder:RTArmIkOffset')
+        self.RightHandLocation = mc.xform(q=True,t=True,ws=True,a=True)
+        self.RightHandRotation = mc.xform(q=True,ro=True,ws=True,a=True)
+        self.RightHandRotationAxis = mc.xform(q=True,ra=True,ws=True,a=True)
+        self.RightHandRotationOrder = mc.xform(q=True,roo=True)
+        mc.curve(n='RightHandIkControl',p=[(0, 1.722746, 7.860943), (0, 3.251807, 7.478254), (0, 6.044356, 5.930515), (0, 7.622267, 3.168138), (0, 8.024061, 1.722746), (0, 8.024061, 1.722746), (0, 12.943818, 1.722746), (0, 12.943818, 1.722746), (0, 12.87327, 4.297724), (0, 12.87327, 4.297724), (0, 17.635217, -0.111485), (0, 17.635217, -0.111485), (0, 12.87327, -4.297724), (0, 12.87327, -4.297724), (0, 12.943818, -1.722746), (0, 12.943818, -1.722746), (0, 8.262479, -1.722746), (0, 8.262479, -1.722746), (0, 8.00495, -3.594757), (0, 6.400466, -6.88404), (0, 3.251807, -8.629149), (0, 1.722746, -9.011838), (0, 1.722746, -9.011838), (0, 1.722746, -12.943818), (0, 1.722746, -12.943818), (0, 4.297724, -12.87327), (0, 4.297724, -12.87327), (0, -0.111485, -17.635217), (0, -0.111485, -17.635217), (0, -4.297724, -12.87327), (0, -4.297724, -12.87327), (0, -1.722746, -12.943818), (0, -1.722746, -12.943818), (0, -1.722746, -9.158285), (0, -1.722746, -9.158285), (0, -3.514276, -8.864257), (0, -6.996539, -7.112641), (0, -8.712533, -3.594757), (0, -8.712533, -3.594757), (0, -8.970063, -1.722746), (0, -8.970063, -1.722746), (0, -12.943818, -1.722746), (0, -12.920302, -2.581072), (0, -12.87327, -4.297724), (0, -12.87327, -4.297724), (0, -17.635217, 0.111485), (0, -17.635217, 0.111485), (0, -12.87327, 4.297724), (0, -12.87327, 4.297724), (0, -12.943818, 1.722746), (0, -12.943818, 1.722746), (0, -8.731644, 1.722746), (0, -8.731644, 1.722746), (0, -6.628292, 6.146979), (0, -3.514276, 7.713361), (0, -3.514276, 7.713361), (0, -1.722746, 8.00739), (0, -1.722746, 8.00739), (0, -1.722746, 12.943818), (0, -1.722746, 12.943818), (0, -4.297724, 12.87327), (0, -4.297724, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217), (0, 4.297724, 12.87327), (0, 4.297724, 12.87327), (0, 1.722746, 12.943818), (0, 1.722746, 12.943818), (0, 1.722746, 9.555234), (1.722746, 0, 7.860943), (1.722746, 0, 7.860943), (6.044356, 0, 5.930515), (6.044356, 0, 5.930515), (8.024061, 0, 1.722746), (8.024061, 0, 1.722746), (12.943818, 0, 1.722746), (12.943818, 0, 1.722746), (12.87327, 0, 4.297724), (12.87327, 0, 4.297724), (17.635217, 0, -0.111485), (17.635217, 0, -0.111485), (12.87327, 0, -4.297724), (12.87327, 0, -4.297724), (12.943818, 0, -1.722746), (12.943818, 0, -1.722746), (8.262479, 0, -1.722746), (8.262479, 0, -1.722746), (8.00495, 0, -3.594757), (6.400466, 0, -6.88404), (3.251807, 0, -8.629149), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -12.943818), (1.722746, 0, -12.943818), (4.297724, 0, -12.87327), (4.297724, 0, -12.87327), (-0.111485, 0, -17.635217), (-0.111485, 0, -17.635217), (-4.297724, 0, -12.87327), (-4.297724, 0, -12.87327), (-1.722746, 0, -12.943818), (-1.722746, 0, -12.943818), (-1.722746, 0, -9.158285), (-1.722746, 0, -9.158285), (-6.996539, 0, -7.112641), (-6.996539, 0, -7.112641), (-8.712533, 0, -3.594757), (-8.970063, 0, -1.722746), (-8.970063, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.87327, 0, -4.297724), (-12.87327, 0, -4.297724), (-17.635217, 0, 0.111485), (-17.635217, 0, 0.111485), (-12.87327, 0, 4.297724), (-12.87327, 0, 4.297724), (-12.943818, 0, 1.722746), (-12.943818, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.32985, 0, 3.168138), (-6.628292, 0, 6.146979), (-3.514276, 0, 7.713361), (-1.722746, 0, 8.00739), (-1.722746, 0, 8.00739), (-1.722746, 0, 12.943818), (-1.722746, 0, 12.943818), (-4.297724, 0, 12.87327), (-4.297724, 0, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217)],k=[0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 130, 130],d=3) 
+        mc.xform(s=(6,6,6))
+        
+        mc.makeIdentity(s=True)
+        mc.xform(t=(self.RightHandLocation[0],self.RightHandLocation[1],self.RightHandLocation[2]),ro=(self.RightHandRotation[0],self.RightHandRotation[1],self.RightHandRotation[2])
+                 ,ra=(self.RightHandRotationAxis[0],self.RightHandRotationAxis[1],self.RightHandRotationAxis[2]),roo=(self.RightHandRotationOrder))
+        mc.pickWalk(d='down')#moving the shape node to make controller more visible
+        mc.move(5,0,0,os=True,r=True,wd=True)
+        mc.pickWalk(d='up')
+        mc.xform(piv=(self.RightHandLocation[0],self.RightHandLocation[1],self.RightHandLocation[2]),ws=True,a=True)
+        mc.parent('jsBuilder:RightHandIkControl','jsBuilder:RTArmIkOffset')
+        mc.select('jsBuilder:RightHandIkControl',add=True)
+        mc.select('jsBuilder:IkRtArmHandle',add=True)
+        mc.parentConstraint(mo=True,n='rightArmIkController')
+        mc.setAttr("jsBuilder:RightFootIkControl.overrideEnabled", 1)
+        mc.setAttr('jsBuilder:RightFootIkControl.overrideColor',13)
+        #now for the left arm >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mc.select('jsBuilder:LTArmIkOffset')
+        self.LeftHandLocation = mc.xform(q=True,t=True,ws=True,a=True)
+        self.LeftHandRotation = mc.xform(q=True,ro=True,ws=True,a=True)
+        self.LeftHandRotationAxis = mc.xform(q=True,ra=True,ws=True,a=True)
+        self.LeftHandRotationOrder = mc.xform(q=True,roo=True)
+        mc.curve(n='LeftHandIkControl',p=[(0, 1.722746, 7.860943), (0, 3.251807, 7.478254), (0, 6.044356, 5.930515), (0, 7.622267, 3.168138), (0, 8.024061, 1.722746), (0, 8.024061, 1.722746), (0, 12.943818, 1.722746), (0, 12.943818, 1.722746), (0, 12.87327, 4.297724), (0, 12.87327, 4.297724), (0, 17.635217, -0.111485), (0, 17.635217, -0.111485), (0, 12.87327, -4.297724), (0, 12.87327, -4.297724), (0, 12.943818, -1.722746), (0, 12.943818, -1.722746), (0, 8.262479, -1.722746), (0, 8.262479, -1.722746), (0, 8.00495, -3.594757), (0, 6.400466, -6.88404), (0, 3.251807, -8.629149), (0, 1.722746, -9.011838), (0, 1.722746, -9.011838), (0, 1.722746, -12.943818), (0, 1.722746, -12.943818), (0, 4.297724, -12.87327), (0, 4.297724, -12.87327), (0, -0.111485, -17.635217), (0, -0.111485, -17.635217), (0, -4.297724, -12.87327), (0, -4.297724, -12.87327), (0, -1.722746, -12.943818), (0, -1.722746, -12.943818), (0, -1.722746, -9.158285), (0, -1.722746, -9.158285), (0, -3.514276, -8.864257), (0, -6.996539, -7.112641), (0, -8.712533, -3.594757), (0, -8.712533, -3.594757), (0, -8.970063, -1.722746), (0, -8.970063, -1.722746), (0, -12.943818, -1.722746), (0, -12.920302, -2.581072), (0, -12.87327, -4.297724), (0, -12.87327, -4.297724), (0, -17.635217, 0.111485), (0, -17.635217, 0.111485), (0, -12.87327, 4.297724), (0, -12.87327, 4.297724), (0, -12.943818, 1.722746), (0, -12.943818, 1.722746), (0, -8.731644, 1.722746), (0, -8.731644, 1.722746), (0, -6.628292, 6.146979), (0, -3.514276, 7.713361), (0, -3.514276, 7.713361), (0, -1.722746, 8.00739), (0, -1.722746, 8.00739), (0, -1.722746, 12.943818), (0, -1.722746, 12.943818), (0, -4.297724, 12.87327), (0, -4.297724, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217), (0, 4.297724, 12.87327), (0, 4.297724, 12.87327), (0, 1.722746, 12.943818), (0, 1.722746, 12.943818), (0, 1.722746, 9.555234), (1.722746, 0, 7.860943), (1.722746, 0, 7.860943), (6.044356, 0, 5.930515), (6.044356, 0, 5.930515), (8.024061, 0, 1.722746), (8.024061, 0, 1.722746), (12.943818, 0, 1.722746), (12.943818, 0, 1.722746), (12.87327, 0, 4.297724), (12.87327, 0, 4.297724), (17.635217, 0, -0.111485), (17.635217, 0, -0.111485), (12.87327, 0, -4.297724), (12.87327, 0, -4.297724), (12.943818, 0, -1.722746), (12.943818, 0, -1.722746), (8.262479, 0, -1.722746), (8.262479, 0, -1.722746), (8.00495, 0, -3.594757), (6.400466, 0, -6.88404), (3.251807, 0, -8.629149), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -9.011838), (1.722746, 0, -12.943818), (1.722746, 0, -12.943818), (4.297724, 0, -12.87327), (4.297724, 0, -12.87327), (-0.111485, 0, -17.635217), (-0.111485, 0, -17.635217), (-4.297724, 0, -12.87327), (-4.297724, 0, -12.87327), (-1.722746, 0, -12.943818), (-1.722746, 0, -12.943818), (-1.722746, 0, -9.158285), (-1.722746, 0, -9.158285), (-6.996539, 0, -7.112641), (-6.996539, 0, -7.112641), (-8.712533, 0, -3.594757), (-8.970063, 0, -1.722746), (-8.970063, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.943818, 0, -1.722746), (-12.87327, 0, -4.297724), (-12.87327, 0, -4.297724), (-17.635217, 0, 0.111485), (-17.635217, 0, 0.111485), (-12.87327, 0, 4.297724), (-12.87327, 0, 4.297724), (-12.943818, 0, 1.722746), (-12.943818, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.731644, 0, 1.722746), (-8.32985, 0, 3.168138), (-6.628292, 0, 6.146979), (-3.514276, 0, 7.713361), (-1.722746, 0, 8.00739), (-1.722746, 0, 8.00739), (-1.722746, 0, 12.943818), (-1.722746, 0, 12.943818), (-4.297724, 0, 12.87327), (-4.297724, 0, 12.87327), (0, 0.111485, 17.635217), (0, 0.111485, 17.635217)],k=[0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 130, 130],d=3) 
+        mc.xform(s=(6,6,6))
+        
+        mc.makeIdentity(s=True)
+        mc.xform(t=(self.LeftHandLocation[0],self.LeftHandLocation[1],self.LeftHandLocation[2]),ro=(self.LeftHandRotation[0],self.LeftHandRotation[1],self.LeftHandRotation[2])
+                 ,ra=(self.LeftHandRotationAxis[0],self.LeftHandRotationAxis[1],self.LeftHandRotationAxis[2]),roo=(self.LeftHandRotationOrder))
+        mc.pickWalk(d='down')#moving the shape node to make controller more visible
+        mc.move(5,0,0,os=True,r=True,wd=True)
+        mc.pickWalk(d='up')
+        mc.xform(piv=(self.LeftHandLocation[0],self.LeftHandLocation[1],self.LeftHandLocation[2]),ws=True,a=True)
+        mc.parent('jsBuilder:LeftHandIkControl','jsBuilder:LTArmIkOffset')
+        mc.select('jsBuilder:LeftHandIkControl',add=True)
+        mc.select('jsBuilder:IkLtArmHandle',add=True)
+        mc.parentConstraint(mo=True,n='leftArmIkController')
+        mc.setAttr("jsBuilder:LeftHandIkControl.overrideEnabled", 1)
+        mc.setAttr('jsBuilder:LeftHandIkControl.overrideColor',14)
+        mc.parent('jsBuilder:BottomLowIkOffset','jsBuilder:RootControl')
+        mc.parent('jsBuilder:UpHighIkOffset','jsBuilder:RootControl')
+        mc.setAttr("jsBuilder:RtLegPoleVectorCtrl.scaleX", 5)
+        mc.setAttr("jsBuilder:RtLegPoleVectorCtrl.scaleY", 5)
+        mc.setAttr("jsBuilder:RtLegPoleVectorCtrl.scaleZ", 5)
+        
+        mc.setAttr("jsBuilder:LtLegPoleVectorCtrl.scaleX", 5)
+        mc.setAttr("jsBuilder:LtLegPoleVectorCtrl.scaleY", 5)
+        mc.setAttr("jsBuilder:LtLegPoleVectorCtrl.scaleZ", 5)
+        
+        mc.setAttr(setAttr "jsBuilder:LtArmPoleVectorCtrl.scaleX", 5)
+        mc.setAttr(setAttr "jsBuilder:LtArmPoleVectorCtrl.scaleY", 5)
+        mc.setAttr(setAttr "jsBuilder:LtArmPoleVectorCtrl.scaleZ", 5)
+        
+        mc.setAttr(setAttr "jsBuilder:RtArmPoleVectorCtrl.scaleX", 5)
+        mc.setAttr(setAttr "jsBuilder:RtArmPoleVectorCtrl.scaleY", 5)
+        mc.setAttr(setAttr "jsBuilder:RtArmPoleVectorCtrl.scaleZ", 5)
+        
+        
+        
 #myNamespaceObject = NameSpaceCaller()
 #myTestObjectA = LocatorSetup()
 #myTestObjectB = BuildSkeletonRig()
